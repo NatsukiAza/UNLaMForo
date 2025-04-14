@@ -1,0 +1,61 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated/client"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       Int      @id @default(autoincrement())
+  name     String   @unique
+  email    String   @unique
+  password String
+  role     Role     @default(USER)
+  creadoEn DateTime @default(now())
+  posteos  Posteo[]
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model Posteo {
+  id         Int      @id @default(autoincrement())
+  upvotes    Int      @default(0)
+  donwvotes  Int      @default(0)
+  titulo     String   @db.VarChar(255)
+  contenido  String   @db.VarChar(5000)
+  fecha      DateTime @default(now())
+  usuarioId  Int
+  comisionId Int
+  usuario    User     @relation(fields: [usuarioId], references: [id])
+  comision   Comision @relation(fields: [comisionId], references: [id])
+}
+
+model Materia {
+  codigo    Int        @id
+  name      String     @db.VarChar(200)
+  anio      Int
+  createdAt DateTime   @default(now())
+  comision  Comision[]
+}
+
+model Comision {
+  id        Int      @id
+  profes    String   @db.VarChar(300)
+  codigo    Int
+  createdAt DateTime @default(now())
+  materiaId Int
+  materia   Materia  @relation(fields: [materiaId], references: [codigo])
+  posteos   Posteo[]
+}

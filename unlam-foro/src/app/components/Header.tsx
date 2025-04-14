@@ -1,5 +1,10 @@
 import Image from "next/image";
-export default function Header() {
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+
+export default async function Header() {
+  const session = await getServerSession(authOptions);
+
   return (
     <header>
       <section className="flex justify-between px-4 py-1 items-center">
@@ -13,7 +18,11 @@ export default function Header() {
         </div>
         <div className="flex">
           <div>
-            <h1></h1>
+            <h1>
+              {session?.user.name
+                ? `${session.user.name}`
+                : "No has iniciado sesion"}
+            </h1>
             <div>
               <a href=""></a>
               <a href=""></a>
