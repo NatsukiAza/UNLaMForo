@@ -4,7 +4,7 @@ import { useState } from "react";
 
 export default function FormNuevaMateria() {
   const [name, setName] = useState("");
-  const [codigo, setCodigo] = useState<number>(0);
+  const [codigo, setCodigo] = useState("");
   const [anio, setAnio] = useState<number>(1);
   const [message, setMessage] = useState("");
 
@@ -13,7 +13,7 @@ export default function FormNuevaMateria() {
 
     const res = await fetch("/api/auth/admin/subjects/create", {
       method: "POST",
-      body: JSON.stringify({ name, codigo, anio }),
+      body: JSON.stringify({ name, codigo: parseInt(codigo), anio }),
       headers: {
         "Content-type": "application/json",
       },
@@ -23,7 +23,7 @@ export default function FormNuevaMateria() {
     if (res.ok) {
       setMessage("¡Pagina creada!");
       setName("");
-      setCodigo(0);
+      setCodigo("0");
     } else {
       setMessage(data.message || "Error al crear");
     }
@@ -51,7 +51,7 @@ export default function FormNuevaMateria() {
         <input
           className="w-full border p-2 rounded"
           value={codigo}
-          onChange={(e) => setCodigo(parseInt(e.target.value))}
+          onChange={(e) => setCodigo(e.target.value)}
           required
         />
       </div>
