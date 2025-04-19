@@ -9,6 +9,17 @@ const roboto = Roboto({
   display: "swap",
 });
 
+type Post = {
+  id: number;
+  titulo: string;
+  contenido: string;
+  fecha: string;
+  usuario: {
+    name: string;
+  };
+  votos: { value: number }[];
+};
+
 export default function ComisionClient({
   comisionId,
   initialPosts,
@@ -17,7 +28,7 @@ export default function ComisionClient({
   codigo,
 }: {
   comisionId: number;
-  initialPosts: any[];
+  initialPosts: Post[];
   isLogued: boolean;
   profes: string;
   codigo: number;
@@ -34,11 +45,8 @@ export default function ComisionClient({
         <AddPost
           comisionId={comisionId}
           onPostCreated={() => {
-            if (
-              typeof window !== "undefined" &&
-              (window as any).__refreshPostList
-            ) {
-              (window as any).__refreshPostList();
+            if (typeof window !== "undefined" && window.__refreshPostList) {
+              window.__refreshPostList();
             }
           }}
         />

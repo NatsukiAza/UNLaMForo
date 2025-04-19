@@ -31,7 +31,7 @@ export default function PostList({
   const refresh = () => fetchPosts();
 
   useEffect(() => {
-    (window as any).__refreshPostList = refresh;
+    window.__refreshPostList = refresh;
   }, []);
 
   const handleVote = async (postId: number, value: number) => {
