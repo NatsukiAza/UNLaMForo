@@ -5,12 +5,12 @@ import Header from "@/app/components/Header";
 import { authOptions } from "@/lib/auth";
 import ComisionClient from "@/app/components/ComisionClient";
 
-type PageParams = {
-  params: { id: string };
-};
-
-export default async function ComisionPage({ params }: PageParams) {
-  const { id } = params;
+export default async function ComisionPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
   const idNumerico = parseInt(id);
 
   if (isNaN(idNumerico)) return notFound();
