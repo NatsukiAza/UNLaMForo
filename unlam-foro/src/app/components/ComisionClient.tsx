@@ -13,11 +13,16 @@ type Post = {
   id: number;
   titulo: string;
   contenido: string;
-  fecha: string;
+  fecha: Date;
+  usuarioId: number;
+  comisionId: number;
   usuario: {
     name: string;
   };
-  votos: { value: number }[];
+  votos: {
+    value: number;
+    id: number;
+  }[];
 };
 
 export default function ComisionClient({

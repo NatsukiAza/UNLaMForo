@@ -6,7 +6,7 @@ type Posteo = {
   id: number;
   titulo: string;
   contenido: string;
-  fecha: string;
+  fecha: Date;
   votos: { value: number }[];
   usuario: {
     name: string;
