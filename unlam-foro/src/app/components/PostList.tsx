@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 
 type Posteo = {
   id: number;
@@ -22,13 +22,13 @@ export default function PostList({
 }) {
   const [posteos, setPosts] = useState(initialPosts);
 
-  const fetchPosts = async () => {
+  const fetchPosts = useCallback(async () => {
     const res = await fetch(`/api/auth/posts/by-comision/${comisionId}`);
     const data = await res.json();
     setPosts(data);
-  };
+  }, [comisionId]);
 
-  const refresh = () => fetchPosts();
+  const refresh = useCallback(() => fetchPosts(), [fetchPosts]);
 
   useEffect(() => {
     window.__refreshPostList = refresh;
