@@ -1,4 +1,3 @@
-import { getServerSession } from "next-auth";
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import FormNuevaMateria from "./form";

@@ -28,18 +28,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json(newMateria, { status: 201});
   } catch (error) {
-    console.error("Error en POST /api/materia:", error); // ¡Imprime el error completo en la consola del servidor!
-
-    // Opcional: Puedes devolver un mensaje más específico en desarrollo, pero ten cuidado en producción
-    let errorMessage = "Error al crear la materia";
-    if (error instanceof Error) {
-        errorMessage = error.message; 
-    }
-
-    return NextResponse.json({ 
-        message: "Error interno del servidor al crear la materia.", 
-        // Puedes añadir el 'detail' solo en entornos de no producción por seguridad:
-        // detail: process.env.NODE_ENV === 'development' ? errorMessage : undefined
-    }, { status: 500 });
+    console.error(error); 
+    return NextResponse.json({ message: "Error interno del servidor al crear la materia.", }, { status: 500 });
 }
 }

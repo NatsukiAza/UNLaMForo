@@ -26,7 +26,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ message: "Usuario registrado con éxito", user: newUser }, {status: 201});
   
   } catch (error) {
-    console.error("Error en el registro:", error);
+    console.error(error);
     return NextResponse.json({ error: "Error en el servidor"}, {status: 500});
   }
 }
