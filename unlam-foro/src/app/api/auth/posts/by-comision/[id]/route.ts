@@ -1,7 +1,13 @@
 import { db } from "@/lib/db";
 import { NextResponse, NextRequest } from "next/server";
 
-export async function GET(request: NextRequest, { params }: { params : Promise<{ id: string }>}){
+type Params = {
+  params: {
+    id: string;
+  };
+};
+
+export async function GET(request: NextRequest, { params }: Params){
   const { id }  = await params;
   const idNum = parseInt(id, 10);
   if (isNaN(idNum)) return NextResponse.json({ message: "ID invalido" }, { status: 400});
