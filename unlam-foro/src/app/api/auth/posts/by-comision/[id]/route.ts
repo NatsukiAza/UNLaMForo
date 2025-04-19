@@ -1,11 +1,19 @@
 import { db } from "@/lib/db";
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 
-export async function GET(_: Request, { params }: { params: { id: string | string[] }}){
-  const id  = Array.isArray(params.id) ? params.id[0] : params.id;
-  const idNum = parseInt(id);
+interface RouteContext {
+  params: {
+    id: string
+  }
+}
+
+export async function GET(request: NextRequest, { params }: RouteContext){
+  const { id }  = params;
+  const idNum = parseInt(id, 10);
   if (isNaN(idNum)) return NextResponse.json({ message: "ID invalido" }, { status: 400});
 
+
+try{
   const posts = await db.posteo.findMany({
     where: { comisionId: idNum },
     include: {
@@ -14,6 +22,12 @@ export async function GET(_: Request, { params }: { params: { id: string | strin
     },
     orderBy: {fecha: "desc"},
   });
-
   return NextResponse.json(posts);
+} catch (error) {
+  console.error("Error fetching posts by comision:", error); // Loguea el error en el servidor
+  return NextResponse.json(
+      { message: "Error interno del servidor al buscar posteos" },
+      { status: 500 }
+  );
+}
 }
