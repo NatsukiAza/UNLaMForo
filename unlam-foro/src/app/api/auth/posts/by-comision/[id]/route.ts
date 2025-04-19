@@ -1,22 +1,22 @@
 import { db } from "@/lib/db";
 import { NextResponse, NextRequest } from "next/server";
 
-export async function GET(request: NextRequest, { params }: { params : { id: string }}){
-  const { id }  = params;
+export async function GET(request: NextRequest, { params }: { params : Promise<{ id: string }>}){
+  const { id }  = await params;
   const idNum = parseInt(id, 10);
   if (isNaN(idNum)) return NextResponse.json({ message: "ID invalido" }, { status: 400});
 
 
 try{
-  const posts = await db.posteo.findMany({
+  const posteos = await db.posteo.findMany({
     where: { comisionId: idNum },
     include: {
-      usuario: true,
+      usuario: { select: { name: true} },
       votos: true,
     },
     orderBy: {fecha: "desc"},
   });
-  return NextResponse.json(posts);
+  return NextResponse.json(posteos);
 } catch (error) {
   console.error("Error fetching posts by comision:", error); // Loguea el error en el servidor
   return NextResponse.json(
