@@ -33,6 +33,11 @@ export type Materia = $Result.DefaultSelection<Prisma.$MateriaPayload>
  * 
  */
 export type Comision = $Result.DefaultSelection<Prisma.$ComisionPayload>
+/**
+ * Model Vote
+ * 
+ */
+export type Vote = $Result.DefaultSelection<Prisma.$VotePayload>
 
 /**
  * Enums
@@ -215,6 +220,16 @@ export class PrismaClient<
     * ```
     */
   get comision(): Prisma.ComisionDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.vote`: Exposes CRUD operations for the **Vote** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Votes
+    * const votes = await prisma.vote.findMany()
+    * ```
+    */
+  get vote(): Prisma.VoteDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -658,7 +673,8 @@ export namespace Prisma {
     User: 'User',
     Posteo: 'Posteo',
     Materia: 'Materia',
-    Comision: 'Comision'
+    Comision: 'Comision',
+    Vote: 'Vote'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -677,7 +693,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "posteo" | "materia" | "comision"
+      modelProps: "user" | "posteo" | "materia" | "comision" | "vote"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -945,6 +961,72 @@ export namespace Prisma {
           }
         }
       }
+      Vote: {
+        payload: Prisma.$VotePayload<ExtArgs>
+        fields: Prisma.VoteFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.VoteFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VotePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.VoteFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VotePayload>
+          }
+          findFirst: {
+            args: Prisma.VoteFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VotePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.VoteFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VotePayload>
+          }
+          findMany: {
+            args: Prisma.VoteFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VotePayload>[]
+          }
+          create: {
+            args: Prisma.VoteCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VotePayload>
+          }
+          createMany: {
+            args: Prisma.VoteCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.VoteDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VotePayload>
+          }
+          update: {
+            args: Prisma.VoteUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VotePayload>
+          }
+          deleteMany: {
+            args: Prisma.VoteDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.VoteUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.VoteUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VotePayload>
+          }
+          aggregate: {
+            args: Prisma.VoteAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateVote>
+          }
+          groupBy: {
+            args: Prisma.VoteGroupByArgs<ExtArgs>
+            result: $Utils.Optional<VoteGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.VoteCountArgs<ExtArgs>
+            result: $Utils.Optional<VoteCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1033,6 +1115,7 @@ export namespace Prisma {
     posteo?: PosteoOmit
     materia?: MateriaOmit
     comision?: ComisionOmit
+    vote?: VoteOmit
   }
 
   /* Types for Logging */
@@ -1128,10 +1211,12 @@ export namespace Prisma {
 
   export type UserCountOutputType = {
     posteos: number
+    votos: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     posteos?: boolean | UserCountOutputTypeCountPosteosArgs
+    votos?: boolean | UserCountOutputTypeCountVotosArgs
   }
 
   // Custom InputTypes
@@ -1150,6 +1235,44 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountPosteosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: PosteoWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountVotosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: VoteWhereInput
+  }
+
+
+  /**
+   * Count Type PosteoCountOutputType
+   */
+
+  export type PosteoCountOutputType = {
+    votos: number
+  }
+
+  export type PosteoCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    votos?: boolean | PosteoCountOutputTypeCountVotosArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * PosteoCountOutputType without action
+   */
+  export type PosteoCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PosteoCountOutputType
+     */
+    select?: PosteoCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * PosteoCountOutputType without action
+   */
+  export type PosteoCountOutputTypeCountVotosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: VoteWhereInput
   }
 
 
@@ -1426,6 +1549,7 @@ export namespace Prisma {
     role?: boolean
     creadoEn?: boolean
     posteos?: boolean | User$posteosArgs<ExtArgs>
+    votos?: boolean | User$votosArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1443,6 +1567,7 @@ export namespace Prisma {
   export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "password" | "role" | "creadoEn", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     posteos?: boolean | User$posteosArgs<ExtArgs>
+    votos?: boolean | User$votosArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -1450,6 +1575,7 @@ export namespace Prisma {
     name: "User"
     objects: {
       posteos: Prisma.$PosteoPayload<ExtArgs>[]
+      votos: Prisma.$VotePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -1799,6 +1925,7 @@ export namespace Prisma {
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     posteos<T extends User$posteosArgs<ExtArgs> = {}>(args?: Subset<T, User$posteosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PosteoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    votos<T extends User$votosArgs<ExtArgs> = {}>(args?: Subset<T, User$votosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2201,6 +2328,30 @@ export namespace Prisma {
   }
 
   /**
+   * User.votos
+   */
+  export type User$votosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Vote
+     */
+    select?: VoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Vote
+     */
+    omit?: VoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VoteInclude<ExtArgs> | null
+    where?: VoteWhereInput
+    orderBy?: VoteOrderByWithRelationInput | VoteOrderByWithRelationInput[]
+    cursor?: VoteWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: VoteScalarFieldEnum | VoteScalarFieldEnum[]
+  }
+
+  /**
    * User without action
    */
   export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2233,24 +2384,18 @@ export namespace Prisma {
 
   export type PosteoAvgAggregateOutputType = {
     id: number | null
-    upvotes: number | null
-    donwvotes: number | null
     usuarioId: number | null
     comisionId: number | null
   }
 
   export type PosteoSumAggregateOutputType = {
     id: number | null
-    upvotes: number | null
-    donwvotes: number | null
     usuarioId: number | null
     comisionId: number | null
   }
 
   export type PosteoMinAggregateOutputType = {
     id: number | null
-    upvotes: number | null
-    donwvotes: number | null
     titulo: string | null
     contenido: string | null
     fecha: Date | null
@@ -2260,8 +2405,6 @@ export namespace Prisma {
 
   export type PosteoMaxAggregateOutputType = {
     id: number | null
-    upvotes: number | null
-    donwvotes: number | null
     titulo: string | null
     contenido: string | null
     fecha: Date | null
@@ -2271,8 +2414,6 @@ export namespace Prisma {
 
   export type PosteoCountAggregateOutputType = {
     id: number
-    upvotes: number
-    donwvotes: number
     titulo: number
     contenido: number
     fecha: number
@@ -2284,24 +2425,18 @@ export namespace Prisma {
 
   export type PosteoAvgAggregateInputType = {
     id?: true
-    upvotes?: true
-    donwvotes?: true
     usuarioId?: true
     comisionId?: true
   }
 
   export type PosteoSumAggregateInputType = {
     id?: true
-    upvotes?: true
-    donwvotes?: true
     usuarioId?: true
     comisionId?: true
   }
 
   export type PosteoMinAggregateInputType = {
     id?: true
-    upvotes?: true
-    donwvotes?: true
     titulo?: true
     contenido?: true
     fecha?: true
@@ -2311,8 +2446,6 @@ export namespace Prisma {
 
   export type PosteoMaxAggregateInputType = {
     id?: true
-    upvotes?: true
-    donwvotes?: true
     titulo?: true
     contenido?: true
     fecha?: true
@@ -2322,8 +2455,6 @@ export namespace Prisma {
 
   export type PosteoCountAggregateInputType = {
     id?: true
-    upvotes?: true
-    donwvotes?: true
     titulo?: true
     contenido?: true
     fecha?: true
@@ -2420,8 +2551,6 @@ export namespace Prisma {
 
   export type PosteoGroupByOutputType = {
     id: number
-    upvotes: number
-    donwvotes: number
     titulo: string
     contenido: string
     fecha: Date
@@ -2450,8 +2579,6 @@ export namespace Prisma {
 
   export type PosteoSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    upvotes?: boolean
-    donwvotes?: boolean
     titulo?: boolean
     contenido?: boolean
     fecha?: boolean
@@ -2459,14 +2586,14 @@ export namespace Prisma {
     comisionId?: boolean
     usuario?: boolean | UserDefaultArgs<ExtArgs>
     comision?: boolean | ComisionDefaultArgs<ExtArgs>
+    votos?: boolean | Posteo$votosArgs<ExtArgs>
+    _count?: boolean | PosteoCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["posteo"]>
 
 
 
   export type PosteoSelectScalar = {
     id?: boolean
-    upvotes?: boolean
-    donwvotes?: boolean
     titulo?: boolean
     contenido?: boolean
     fecha?: boolean
@@ -2474,10 +2601,12 @@ export namespace Prisma {
     comisionId?: boolean
   }
 
-  export type PosteoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "upvotes" | "donwvotes" | "titulo" | "contenido" | "fecha" | "usuarioId" | "comisionId", ExtArgs["result"]["posteo"]>
+  export type PosteoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "titulo" | "contenido" | "fecha" | "usuarioId" | "comisionId", ExtArgs["result"]["posteo"]>
   export type PosteoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     usuario?: boolean | UserDefaultArgs<ExtArgs>
     comision?: boolean | ComisionDefaultArgs<ExtArgs>
+    votos?: boolean | Posteo$votosArgs<ExtArgs>
+    _count?: boolean | PosteoCountOutputTypeDefaultArgs<ExtArgs>
   }
 
   export type $PosteoPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2485,11 +2614,10 @@ export namespace Prisma {
     objects: {
       usuario: Prisma.$UserPayload<ExtArgs>
       comision: Prisma.$ComisionPayload<ExtArgs>
+      votos: Prisma.$VotePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      upvotes: number
-      donwvotes: number
       titulo: string
       contenido: string
       fecha: Date
@@ -2837,6 +2965,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     usuario<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     comision<T extends ComisionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ComisionDefaultArgs<ExtArgs>>): Prisma__ComisionClient<$Result.GetResult<Prisma.$ComisionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    votos<T extends Posteo$votosArgs<ExtArgs> = {}>(args?: Subset<T, Posteo$votosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2867,8 +2996,6 @@ export namespace Prisma {
    */
   interface PosteoFieldRefs {
     readonly id: FieldRef<"Posteo", 'Int'>
-    readonly upvotes: FieldRef<"Posteo", 'Int'>
-    readonly donwvotes: FieldRef<"Posteo", 'Int'>
     readonly titulo: FieldRef<"Posteo", 'String'>
     readonly contenido: FieldRef<"Posteo", 'String'>
     readonly fecha: FieldRef<"Posteo", 'DateTime'>
@@ -3214,6 +3341,30 @@ export namespace Prisma {
      * Limit how many Posteos to delete.
      */
     limit?: number
+  }
+
+  /**
+   * Posteo.votos
+   */
+  export type Posteo$votosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Vote
+     */
+    select?: VoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Vote
+     */
+    omit?: VoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VoteInclude<ExtArgs> | null
+    where?: VoteWhereInput
+    orderBy?: VoteOrderByWithRelationInput | VoteOrderByWithRelationInput[]
+    cursor?: VoteWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: VoteScalarFieldEnum | VoteScalarFieldEnum[]
   }
 
   /**
@@ -5219,6 +5370,974 @@ export namespace Prisma {
 
 
   /**
+   * Model Vote
+   */
+
+  export type AggregateVote = {
+    _count: VoteCountAggregateOutputType | null
+    _avg: VoteAvgAggregateOutputType | null
+    _sum: VoteSumAggregateOutputType | null
+    _min: VoteMinAggregateOutputType | null
+    _max: VoteMaxAggregateOutputType | null
+  }
+
+  export type VoteAvgAggregateOutputType = {
+    id: number | null
+    value: number | null
+    userId: number | null
+    postId: number | null
+  }
+
+  export type VoteSumAggregateOutputType = {
+    id: number | null
+    value: number | null
+    userId: number | null
+    postId: number | null
+  }
+
+  export type VoteMinAggregateOutputType = {
+    id: number | null
+    value: number | null
+    userId: number | null
+    postId: number | null
+  }
+
+  export type VoteMaxAggregateOutputType = {
+    id: number | null
+    value: number | null
+    userId: number | null
+    postId: number | null
+  }
+
+  export type VoteCountAggregateOutputType = {
+    id: number
+    value: number
+    userId: number
+    postId: number
+    _all: number
+  }
+
+
+  export type VoteAvgAggregateInputType = {
+    id?: true
+    value?: true
+    userId?: true
+    postId?: true
+  }
+
+  export type VoteSumAggregateInputType = {
+    id?: true
+    value?: true
+    userId?: true
+    postId?: true
+  }
+
+  export type VoteMinAggregateInputType = {
+    id?: true
+    value?: true
+    userId?: true
+    postId?: true
+  }
+
+  export type VoteMaxAggregateInputType = {
+    id?: true
+    value?: true
+    userId?: true
+    postId?: true
+  }
+
+  export type VoteCountAggregateInputType = {
+    id?: true
+    value?: true
+    userId?: true
+    postId?: true
+    _all?: true
+  }
+
+  export type VoteAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Vote to aggregate.
+     */
+    where?: VoteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Votes to fetch.
+     */
+    orderBy?: VoteOrderByWithRelationInput | VoteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: VoteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Votes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Votes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Votes
+    **/
+    _count?: true | VoteCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: VoteAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: VoteSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: VoteMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: VoteMaxAggregateInputType
+  }
+
+  export type GetVoteAggregateType<T extends VoteAggregateArgs> = {
+        [P in keyof T & keyof AggregateVote]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateVote[P]>
+      : GetScalarType<T[P], AggregateVote[P]>
+  }
+
+
+
+
+  export type VoteGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: VoteWhereInput
+    orderBy?: VoteOrderByWithAggregationInput | VoteOrderByWithAggregationInput[]
+    by: VoteScalarFieldEnum[] | VoteScalarFieldEnum
+    having?: VoteScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: VoteCountAggregateInputType | true
+    _avg?: VoteAvgAggregateInputType
+    _sum?: VoteSumAggregateInputType
+    _min?: VoteMinAggregateInputType
+    _max?: VoteMaxAggregateInputType
+  }
+
+  export type VoteGroupByOutputType = {
+    id: number
+    value: number
+    userId: number
+    postId: number
+    _count: VoteCountAggregateOutputType | null
+    _avg: VoteAvgAggregateOutputType | null
+    _sum: VoteSumAggregateOutputType | null
+    _min: VoteMinAggregateOutputType | null
+    _max: VoteMaxAggregateOutputType | null
+  }
+
+  type GetVoteGroupByPayload<T extends VoteGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<VoteGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof VoteGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], VoteGroupByOutputType[P]>
+            : GetScalarType<T[P], VoteGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type VoteSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    value?: boolean
+    userId?: boolean
+    postId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    post?: boolean | PosteoDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["vote"]>
+
+
+
+  export type VoteSelectScalar = {
+    id?: boolean
+    value?: boolean
+    userId?: boolean
+    postId?: boolean
+  }
+
+  export type VoteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "value" | "userId" | "postId", ExtArgs["result"]["vote"]>
+  export type VoteInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    post?: boolean | PosteoDefaultArgs<ExtArgs>
+  }
+
+  export type $VotePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Vote"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      post: Prisma.$PosteoPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      value: number
+      userId: number
+      postId: number
+    }, ExtArgs["result"]["vote"]>
+    composites: {}
+  }
+
+  type VoteGetPayload<S extends boolean | null | undefined | VoteDefaultArgs> = $Result.GetResult<Prisma.$VotePayload, S>
+
+  type VoteCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<VoteFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: VoteCountAggregateInputType | true
+    }
+
+  export interface VoteDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Vote'], meta: { name: 'Vote' } }
+    /**
+     * Find zero or one Vote that matches the filter.
+     * @param {VoteFindUniqueArgs} args - Arguments to find a Vote
+     * @example
+     * // Get one Vote
+     * const vote = await prisma.vote.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends VoteFindUniqueArgs>(args: SelectSubset<T, VoteFindUniqueArgs<ExtArgs>>): Prisma__VoteClient<$Result.GetResult<Prisma.$VotePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Vote that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {VoteFindUniqueOrThrowArgs} args - Arguments to find a Vote
+     * @example
+     * // Get one Vote
+     * const vote = await prisma.vote.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends VoteFindUniqueOrThrowArgs>(args: SelectSubset<T, VoteFindUniqueOrThrowArgs<ExtArgs>>): Prisma__VoteClient<$Result.GetResult<Prisma.$VotePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Vote that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VoteFindFirstArgs} args - Arguments to find a Vote
+     * @example
+     * // Get one Vote
+     * const vote = await prisma.vote.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends VoteFindFirstArgs>(args?: SelectSubset<T, VoteFindFirstArgs<ExtArgs>>): Prisma__VoteClient<$Result.GetResult<Prisma.$VotePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Vote that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VoteFindFirstOrThrowArgs} args - Arguments to find a Vote
+     * @example
+     * // Get one Vote
+     * const vote = await prisma.vote.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends VoteFindFirstOrThrowArgs>(args?: SelectSubset<T, VoteFindFirstOrThrowArgs<ExtArgs>>): Prisma__VoteClient<$Result.GetResult<Prisma.$VotePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Votes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VoteFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Votes
+     * const votes = await prisma.vote.findMany()
+     * 
+     * // Get first 10 Votes
+     * const votes = await prisma.vote.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const voteWithIdOnly = await prisma.vote.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends VoteFindManyArgs>(args?: SelectSubset<T, VoteFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Vote.
+     * @param {VoteCreateArgs} args - Arguments to create a Vote.
+     * @example
+     * // Create one Vote
+     * const Vote = await prisma.vote.create({
+     *   data: {
+     *     // ... data to create a Vote
+     *   }
+     * })
+     * 
+     */
+    create<T extends VoteCreateArgs>(args: SelectSubset<T, VoteCreateArgs<ExtArgs>>): Prisma__VoteClient<$Result.GetResult<Prisma.$VotePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Votes.
+     * @param {VoteCreateManyArgs} args - Arguments to create many Votes.
+     * @example
+     * // Create many Votes
+     * const vote = await prisma.vote.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends VoteCreateManyArgs>(args?: SelectSubset<T, VoteCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Vote.
+     * @param {VoteDeleteArgs} args - Arguments to delete one Vote.
+     * @example
+     * // Delete one Vote
+     * const Vote = await prisma.vote.delete({
+     *   where: {
+     *     // ... filter to delete one Vote
+     *   }
+     * })
+     * 
+     */
+    delete<T extends VoteDeleteArgs>(args: SelectSubset<T, VoteDeleteArgs<ExtArgs>>): Prisma__VoteClient<$Result.GetResult<Prisma.$VotePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Vote.
+     * @param {VoteUpdateArgs} args - Arguments to update one Vote.
+     * @example
+     * // Update one Vote
+     * const vote = await prisma.vote.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends VoteUpdateArgs>(args: SelectSubset<T, VoteUpdateArgs<ExtArgs>>): Prisma__VoteClient<$Result.GetResult<Prisma.$VotePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Votes.
+     * @param {VoteDeleteManyArgs} args - Arguments to filter Votes to delete.
+     * @example
+     * // Delete a few Votes
+     * const { count } = await prisma.vote.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends VoteDeleteManyArgs>(args?: SelectSubset<T, VoteDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Votes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VoteUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Votes
+     * const vote = await prisma.vote.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends VoteUpdateManyArgs>(args: SelectSubset<T, VoteUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Vote.
+     * @param {VoteUpsertArgs} args - Arguments to update or create a Vote.
+     * @example
+     * // Update or create a Vote
+     * const vote = await prisma.vote.upsert({
+     *   create: {
+     *     // ... data to create a Vote
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Vote we want to update
+     *   }
+     * })
+     */
+    upsert<T extends VoteUpsertArgs>(args: SelectSubset<T, VoteUpsertArgs<ExtArgs>>): Prisma__VoteClient<$Result.GetResult<Prisma.$VotePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Votes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VoteCountArgs} args - Arguments to filter Votes to count.
+     * @example
+     * // Count the number of Votes
+     * const count = await prisma.vote.count({
+     *   where: {
+     *     // ... the filter for the Votes we want to count
+     *   }
+     * })
+    **/
+    count<T extends VoteCountArgs>(
+      args?: Subset<T, VoteCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], VoteCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Vote.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VoteAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends VoteAggregateArgs>(args: Subset<T, VoteAggregateArgs>): Prisma.PrismaPromise<GetVoteAggregateType<T>>
+
+    /**
+     * Group by Vote.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VoteGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends VoteGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: VoteGroupByArgs['orderBy'] }
+        : { orderBy?: VoteGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, VoteGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetVoteGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Vote model
+   */
+  readonly fields: VoteFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Vote.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__VoteClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    post<T extends PosteoDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PosteoDefaultArgs<ExtArgs>>): Prisma__PosteoClient<$Result.GetResult<Prisma.$PosteoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Vote model
+   */
+  interface VoteFieldRefs {
+    readonly id: FieldRef<"Vote", 'Int'>
+    readonly value: FieldRef<"Vote", 'Int'>
+    readonly userId: FieldRef<"Vote", 'Int'>
+    readonly postId: FieldRef<"Vote", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Vote findUnique
+   */
+  export type VoteFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Vote
+     */
+    select?: VoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Vote
+     */
+    omit?: VoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VoteInclude<ExtArgs> | null
+    /**
+     * Filter, which Vote to fetch.
+     */
+    where: VoteWhereUniqueInput
+  }
+
+  /**
+   * Vote findUniqueOrThrow
+   */
+  export type VoteFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Vote
+     */
+    select?: VoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Vote
+     */
+    omit?: VoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VoteInclude<ExtArgs> | null
+    /**
+     * Filter, which Vote to fetch.
+     */
+    where: VoteWhereUniqueInput
+  }
+
+  /**
+   * Vote findFirst
+   */
+  export type VoteFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Vote
+     */
+    select?: VoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Vote
+     */
+    omit?: VoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VoteInclude<ExtArgs> | null
+    /**
+     * Filter, which Vote to fetch.
+     */
+    where?: VoteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Votes to fetch.
+     */
+    orderBy?: VoteOrderByWithRelationInput | VoteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Votes.
+     */
+    cursor?: VoteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Votes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Votes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Votes.
+     */
+    distinct?: VoteScalarFieldEnum | VoteScalarFieldEnum[]
+  }
+
+  /**
+   * Vote findFirstOrThrow
+   */
+  export type VoteFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Vote
+     */
+    select?: VoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Vote
+     */
+    omit?: VoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VoteInclude<ExtArgs> | null
+    /**
+     * Filter, which Vote to fetch.
+     */
+    where?: VoteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Votes to fetch.
+     */
+    orderBy?: VoteOrderByWithRelationInput | VoteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Votes.
+     */
+    cursor?: VoteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Votes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Votes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Votes.
+     */
+    distinct?: VoteScalarFieldEnum | VoteScalarFieldEnum[]
+  }
+
+  /**
+   * Vote findMany
+   */
+  export type VoteFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Vote
+     */
+    select?: VoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Vote
+     */
+    omit?: VoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VoteInclude<ExtArgs> | null
+    /**
+     * Filter, which Votes to fetch.
+     */
+    where?: VoteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Votes to fetch.
+     */
+    orderBy?: VoteOrderByWithRelationInput | VoteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Votes.
+     */
+    cursor?: VoteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Votes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Votes.
+     */
+    skip?: number
+    distinct?: VoteScalarFieldEnum | VoteScalarFieldEnum[]
+  }
+
+  /**
+   * Vote create
+   */
+  export type VoteCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Vote
+     */
+    select?: VoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Vote
+     */
+    omit?: VoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VoteInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Vote.
+     */
+    data: XOR<VoteCreateInput, VoteUncheckedCreateInput>
+  }
+
+  /**
+   * Vote createMany
+   */
+  export type VoteCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Votes.
+     */
+    data: VoteCreateManyInput | VoteCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Vote update
+   */
+  export type VoteUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Vote
+     */
+    select?: VoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Vote
+     */
+    omit?: VoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VoteInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Vote.
+     */
+    data: XOR<VoteUpdateInput, VoteUncheckedUpdateInput>
+    /**
+     * Choose, which Vote to update.
+     */
+    where: VoteWhereUniqueInput
+  }
+
+  /**
+   * Vote updateMany
+   */
+  export type VoteUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Votes.
+     */
+    data: XOR<VoteUpdateManyMutationInput, VoteUncheckedUpdateManyInput>
+    /**
+     * Filter which Votes to update
+     */
+    where?: VoteWhereInput
+    /**
+     * Limit how many Votes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Vote upsert
+   */
+  export type VoteUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Vote
+     */
+    select?: VoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Vote
+     */
+    omit?: VoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VoteInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Vote to update in case it exists.
+     */
+    where: VoteWhereUniqueInput
+    /**
+     * In case the Vote found by the `where` argument doesn't exist, create a new Vote with this data.
+     */
+    create: XOR<VoteCreateInput, VoteUncheckedCreateInput>
+    /**
+     * In case the Vote was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<VoteUpdateInput, VoteUncheckedUpdateInput>
+  }
+
+  /**
+   * Vote delete
+   */
+  export type VoteDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Vote
+     */
+    select?: VoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Vote
+     */
+    omit?: VoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VoteInclude<ExtArgs> | null
+    /**
+     * Filter which Vote to delete.
+     */
+    where: VoteWhereUniqueInput
+  }
+
+  /**
+   * Vote deleteMany
+   */
+  export type VoteDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Votes to delete
+     */
+    where?: VoteWhereInput
+    /**
+     * Limit how many Votes to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Vote without action
+   */
+  export type VoteDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Vote
+     */
+    select?: VoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Vote
+     */
+    omit?: VoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VoteInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -5246,8 +6365,6 @@ export namespace Prisma {
 
   export const PosteoScalarFieldEnum: {
     id: 'id',
-    upvotes: 'upvotes',
-    donwvotes: 'donwvotes',
     titulo: 'titulo',
     contenido: 'contenido',
     fecha: 'fecha',
@@ -5277,6 +6394,16 @@ export namespace Prisma {
   };
 
   export type ComisionScalarFieldEnum = (typeof ComisionScalarFieldEnum)[keyof typeof ComisionScalarFieldEnum]
+
+
+  export const VoteScalarFieldEnum: {
+    id: 'id',
+    value: 'value',
+    userId: 'userId',
+    postId: 'postId'
+  };
+
+  export type VoteScalarFieldEnum = (typeof VoteScalarFieldEnum)[keyof typeof VoteScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -5372,6 +6499,7 @@ export namespace Prisma {
     role?: EnumRoleFilter<"User"> | $Enums.Role
     creadoEn?: DateTimeFilter<"User"> | Date | string
     posteos?: PosteoListRelationFilter
+    votos?: VoteListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -5382,6 +6510,7 @@ export namespace Prisma {
     role?: SortOrder
     creadoEn?: SortOrder
     posteos?: PosteoOrderByRelationAggregateInput
+    votos?: VoteOrderByRelationAggregateInput
     _relevance?: UserOrderByRelevanceInput
   }
 
@@ -5396,6 +6525,7 @@ export namespace Prisma {
     role?: EnumRoleFilter<"User"> | $Enums.Role
     creadoEn?: DateTimeFilter<"User"> | Date | string
     posteos?: PosteoListRelationFilter
+    votos?: VoteListRelationFilter
   }, "id" | "name" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -5429,8 +6559,6 @@ export namespace Prisma {
     OR?: PosteoWhereInput[]
     NOT?: PosteoWhereInput | PosteoWhereInput[]
     id?: IntFilter<"Posteo"> | number
-    upvotes?: IntFilter<"Posteo"> | number
-    donwvotes?: IntFilter<"Posteo"> | number
     titulo?: StringFilter<"Posteo"> | string
     contenido?: StringFilter<"Posteo"> | string
     fecha?: DateTimeFilter<"Posteo"> | Date | string
@@ -5438,12 +6566,11 @@ export namespace Prisma {
     comisionId?: IntFilter<"Posteo"> | number
     usuario?: XOR<UserScalarRelationFilter, UserWhereInput>
     comision?: XOR<ComisionScalarRelationFilter, ComisionWhereInput>
+    votos?: VoteListRelationFilter
   }
 
   export type PosteoOrderByWithRelationInput = {
     id?: SortOrder
-    upvotes?: SortOrder
-    donwvotes?: SortOrder
     titulo?: SortOrder
     contenido?: SortOrder
     fecha?: SortOrder
@@ -5451,6 +6578,7 @@ export namespace Prisma {
     comisionId?: SortOrder
     usuario?: UserOrderByWithRelationInput
     comision?: ComisionOrderByWithRelationInput
+    votos?: VoteOrderByRelationAggregateInput
     _relevance?: PosteoOrderByRelevanceInput
   }
 
@@ -5459,8 +6587,6 @@ export namespace Prisma {
     AND?: PosteoWhereInput | PosteoWhereInput[]
     OR?: PosteoWhereInput[]
     NOT?: PosteoWhereInput | PosteoWhereInput[]
-    upvotes?: IntFilter<"Posteo"> | number
-    donwvotes?: IntFilter<"Posteo"> | number
     titulo?: StringFilter<"Posteo"> | string
     contenido?: StringFilter<"Posteo"> | string
     fecha?: DateTimeFilter<"Posteo"> | Date | string
@@ -5468,12 +6594,11 @@ export namespace Prisma {
     comisionId?: IntFilter<"Posteo"> | number
     usuario?: XOR<UserScalarRelationFilter, UserWhereInput>
     comision?: XOR<ComisionScalarRelationFilter, ComisionWhereInput>
+    votos?: VoteListRelationFilter
   }, "id">
 
   export type PosteoOrderByWithAggregationInput = {
     id?: SortOrder
-    upvotes?: SortOrder
-    donwvotes?: SortOrder
     titulo?: SortOrder
     contenido?: SortOrder
     fecha?: SortOrder
@@ -5491,8 +6616,6 @@ export namespace Prisma {
     OR?: PosteoScalarWhereWithAggregatesInput[]
     NOT?: PosteoScalarWhereWithAggregatesInput | PosteoScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Posteo"> | number
-    upvotes?: IntWithAggregatesFilter<"Posteo"> | number
-    donwvotes?: IntWithAggregatesFilter<"Posteo"> | number
     titulo?: StringWithAggregatesFilter<"Posteo"> | string
     contenido?: StringWithAggregatesFilter<"Posteo"> | string
     fecha?: DateTimeWithAggregatesFilter<"Posteo"> | Date | string
@@ -5614,6 +6737,62 @@ export namespace Prisma {
     materiaId?: IntWithAggregatesFilter<"Comision"> | number
   }
 
+  export type VoteWhereInput = {
+    AND?: VoteWhereInput | VoteWhereInput[]
+    OR?: VoteWhereInput[]
+    NOT?: VoteWhereInput | VoteWhereInput[]
+    id?: IntFilter<"Vote"> | number
+    value?: IntFilter<"Vote"> | number
+    userId?: IntFilter<"Vote"> | number
+    postId?: IntFilter<"Vote"> | number
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    post?: XOR<PosteoScalarRelationFilter, PosteoWhereInput>
+  }
+
+  export type VoteOrderByWithRelationInput = {
+    id?: SortOrder
+    value?: SortOrder
+    userId?: SortOrder
+    postId?: SortOrder
+    user?: UserOrderByWithRelationInput
+    post?: PosteoOrderByWithRelationInput
+  }
+
+  export type VoteWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    userId_postId?: VoteUserIdPostIdCompoundUniqueInput
+    AND?: VoteWhereInput | VoteWhereInput[]
+    OR?: VoteWhereInput[]
+    NOT?: VoteWhereInput | VoteWhereInput[]
+    value?: IntFilter<"Vote"> | number
+    userId?: IntFilter<"Vote"> | number
+    postId?: IntFilter<"Vote"> | number
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    post?: XOR<PosteoScalarRelationFilter, PosteoWhereInput>
+  }, "id" | "userId_postId">
+
+  export type VoteOrderByWithAggregationInput = {
+    id?: SortOrder
+    value?: SortOrder
+    userId?: SortOrder
+    postId?: SortOrder
+    _count?: VoteCountOrderByAggregateInput
+    _avg?: VoteAvgOrderByAggregateInput
+    _max?: VoteMaxOrderByAggregateInput
+    _min?: VoteMinOrderByAggregateInput
+    _sum?: VoteSumOrderByAggregateInput
+  }
+
+  export type VoteScalarWhereWithAggregatesInput = {
+    AND?: VoteScalarWhereWithAggregatesInput | VoteScalarWhereWithAggregatesInput[]
+    OR?: VoteScalarWhereWithAggregatesInput[]
+    NOT?: VoteScalarWhereWithAggregatesInput | VoteScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Vote"> | number
+    value?: IntWithAggregatesFilter<"Vote"> | number
+    userId?: IntWithAggregatesFilter<"Vote"> | number
+    postId?: IntWithAggregatesFilter<"Vote"> | number
+  }
+
   export type UserCreateInput = {
     name: string
     email: string
@@ -5621,6 +6800,7 @@ export namespace Prisma {
     role?: $Enums.Role
     creadoEn?: Date | string
     posteos?: PosteoCreateNestedManyWithoutUsuarioInput
+    votos?: VoteCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -5631,6 +6811,7 @@ export namespace Prisma {
     role?: $Enums.Role
     creadoEn?: Date | string
     posteos?: PosteoUncheckedCreateNestedManyWithoutUsuarioInput
+    votos?: VoteUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -5640,6 +6821,7 @@ export namespace Prisma {
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     creadoEn?: DateTimeFieldUpdateOperationsInput | Date | string
     posteos?: PosteoUpdateManyWithoutUsuarioNestedInput
+    votos?: VoteUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -5650,6 +6832,7 @@ export namespace Prisma {
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     creadoEn?: DateTimeFieldUpdateOperationsInput | Date | string
     posteos?: PosteoUncheckedUpdateManyWithoutUsuarioNestedInput
+    votos?: VoteUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -5679,51 +6862,45 @@ export namespace Prisma {
   }
 
   export type PosteoCreateInput = {
-    upvotes?: number
-    donwvotes?: number
     titulo: string
     contenido: string
     fecha?: Date | string
     usuario: UserCreateNestedOneWithoutPosteosInput
     comision: ComisionCreateNestedOneWithoutPosteosInput
+    votos?: VoteCreateNestedManyWithoutPostInput
   }
 
   export type PosteoUncheckedCreateInput = {
     id?: number
-    upvotes?: number
-    donwvotes?: number
     titulo: string
     contenido: string
     fecha?: Date | string
     usuarioId: number
     comisionId: number
+    votos?: VoteUncheckedCreateNestedManyWithoutPostInput
   }
 
   export type PosteoUpdateInput = {
-    upvotes?: IntFieldUpdateOperationsInput | number
-    donwvotes?: IntFieldUpdateOperationsInput | number
     titulo?: StringFieldUpdateOperationsInput | string
     contenido?: StringFieldUpdateOperationsInput | string
     fecha?: DateTimeFieldUpdateOperationsInput | Date | string
     usuario?: UserUpdateOneRequiredWithoutPosteosNestedInput
     comision?: ComisionUpdateOneRequiredWithoutPosteosNestedInput
+    votos?: VoteUpdateManyWithoutPostNestedInput
   }
 
   export type PosteoUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    upvotes?: IntFieldUpdateOperationsInput | number
-    donwvotes?: IntFieldUpdateOperationsInput | number
     titulo?: StringFieldUpdateOperationsInput | string
     contenido?: StringFieldUpdateOperationsInput | string
     fecha?: DateTimeFieldUpdateOperationsInput | Date | string
     usuarioId?: IntFieldUpdateOperationsInput | number
     comisionId?: IntFieldUpdateOperationsInput | number
+    votos?: VoteUncheckedUpdateManyWithoutPostNestedInput
   }
 
   export type PosteoCreateManyInput = {
     id?: number
-    upvotes?: number
-    donwvotes?: number
     titulo: string
     contenido: string
     fecha?: Date | string
@@ -5732,8 +6909,6 @@ export namespace Prisma {
   }
 
   export type PosteoUpdateManyMutationInput = {
-    upvotes?: IntFieldUpdateOperationsInput | number
-    donwvotes?: IntFieldUpdateOperationsInput | number
     titulo?: StringFieldUpdateOperationsInput | string
     contenido?: StringFieldUpdateOperationsInput | string
     fecha?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -5741,8 +6916,6 @@ export namespace Prisma {
 
   export type PosteoUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    upvotes?: IntFieldUpdateOperationsInput | number
-    donwvotes?: IntFieldUpdateOperationsInput | number
     titulo?: StringFieldUpdateOperationsInput | string
     contenido?: StringFieldUpdateOperationsInput | string
     fecha?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -5859,6 +7032,50 @@ export namespace Prisma {
     materiaId?: IntFieldUpdateOperationsInput | number
   }
 
+  export type VoteCreateInput = {
+    value: number
+    user: UserCreateNestedOneWithoutVotosInput
+    post: PosteoCreateNestedOneWithoutVotosInput
+  }
+
+  export type VoteUncheckedCreateInput = {
+    id?: number
+    value: number
+    userId: number
+    postId: number
+  }
+
+  export type VoteUpdateInput = {
+    value?: IntFieldUpdateOperationsInput | number
+    user?: UserUpdateOneRequiredWithoutVotosNestedInput
+    post?: PosteoUpdateOneRequiredWithoutVotosNestedInput
+  }
+
+  export type VoteUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    value?: IntFieldUpdateOperationsInput | number
+    userId?: IntFieldUpdateOperationsInput | number
+    postId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type VoteCreateManyInput = {
+    id?: number
+    value: number
+    userId: number
+    postId: number
+  }
+
+  export type VoteUpdateManyMutationInput = {
+    value?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type VoteUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    value?: IntFieldUpdateOperationsInput | number
+    userId?: IntFieldUpdateOperationsInput | number
+    postId?: IntFieldUpdateOperationsInput | number
+  }
+
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[]
@@ -5909,7 +7126,17 @@ export namespace Prisma {
     none?: PosteoWhereInput
   }
 
+  export type VoteListRelationFilter = {
+    every?: VoteWhereInput
+    some?: VoteWhereInput
+    none?: VoteWhereInput
+  }
+
   export type PosteoOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type VoteOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -6030,8 +7257,6 @@ export namespace Prisma {
 
   export type PosteoCountOrderByAggregateInput = {
     id?: SortOrder
-    upvotes?: SortOrder
-    donwvotes?: SortOrder
     titulo?: SortOrder
     contenido?: SortOrder
     fecha?: SortOrder
@@ -6041,16 +7266,12 @@ export namespace Prisma {
 
   export type PosteoAvgOrderByAggregateInput = {
     id?: SortOrder
-    upvotes?: SortOrder
-    donwvotes?: SortOrder
     usuarioId?: SortOrder
     comisionId?: SortOrder
   }
 
   export type PosteoMaxOrderByAggregateInput = {
     id?: SortOrder
-    upvotes?: SortOrder
-    donwvotes?: SortOrder
     titulo?: SortOrder
     contenido?: SortOrder
     fecha?: SortOrder
@@ -6060,8 +7281,6 @@ export namespace Prisma {
 
   export type PosteoMinOrderByAggregateInput = {
     id?: SortOrder
-    upvotes?: SortOrder
-    donwvotes?: SortOrder
     titulo?: SortOrder
     contenido?: SortOrder
     fecha?: SortOrder
@@ -6071,8 +7290,6 @@ export namespace Prisma {
 
   export type PosteoSumOrderByAggregateInput = {
     id?: SortOrder
-    upvotes?: SortOrder
-    donwvotes?: SortOrder
     usuarioId?: SortOrder
     comisionId?: SortOrder
   }
@@ -6171,6 +7388,51 @@ export namespace Prisma {
     materiaId?: SortOrder
   }
 
+  export type PosteoScalarRelationFilter = {
+    is?: PosteoWhereInput
+    isNot?: PosteoWhereInput
+  }
+
+  export type VoteUserIdPostIdCompoundUniqueInput = {
+    userId: number
+    postId: number
+  }
+
+  export type VoteCountOrderByAggregateInput = {
+    id?: SortOrder
+    value?: SortOrder
+    userId?: SortOrder
+    postId?: SortOrder
+  }
+
+  export type VoteAvgOrderByAggregateInput = {
+    id?: SortOrder
+    value?: SortOrder
+    userId?: SortOrder
+    postId?: SortOrder
+  }
+
+  export type VoteMaxOrderByAggregateInput = {
+    id?: SortOrder
+    value?: SortOrder
+    userId?: SortOrder
+    postId?: SortOrder
+  }
+
+  export type VoteMinOrderByAggregateInput = {
+    id?: SortOrder
+    value?: SortOrder
+    userId?: SortOrder
+    postId?: SortOrder
+  }
+
+  export type VoteSumOrderByAggregateInput = {
+    id?: SortOrder
+    value?: SortOrder
+    userId?: SortOrder
+    postId?: SortOrder
+  }
+
   export type PosteoCreateNestedManyWithoutUsuarioInput = {
     create?: XOR<PosteoCreateWithoutUsuarioInput, PosteoUncheckedCreateWithoutUsuarioInput> | PosteoCreateWithoutUsuarioInput[] | PosteoUncheckedCreateWithoutUsuarioInput[]
     connectOrCreate?: PosteoCreateOrConnectWithoutUsuarioInput | PosteoCreateOrConnectWithoutUsuarioInput[]
@@ -6178,11 +7440,25 @@ export namespace Prisma {
     connect?: PosteoWhereUniqueInput | PosteoWhereUniqueInput[]
   }
 
+  export type VoteCreateNestedManyWithoutUserInput = {
+    create?: XOR<VoteCreateWithoutUserInput, VoteUncheckedCreateWithoutUserInput> | VoteCreateWithoutUserInput[] | VoteUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: VoteCreateOrConnectWithoutUserInput | VoteCreateOrConnectWithoutUserInput[]
+    createMany?: VoteCreateManyUserInputEnvelope
+    connect?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
+  }
+
   export type PosteoUncheckedCreateNestedManyWithoutUsuarioInput = {
     create?: XOR<PosteoCreateWithoutUsuarioInput, PosteoUncheckedCreateWithoutUsuarioInput> | PosteoCreateWithoutUsuarioInput[] | PosteoUncheckedCreateWithoutUsuarioInput[]
     connectOrCreate?: PosteoCreateOrConnectWithoutUsuarioInput | PosteoCreateOrConnectWithoutUsuarioInput[]
     createMany?: PosteoCreateManyUsuarioInputEnvelope
     connect?: PosteoWhereUniqueInput | PosteoWhereUniqueInput[]
+  }
+
+  export type VoteUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<VoteCreateWithoutUserInput, VoteUncheckedCreateWithoutUserInput> | VoteCreateWithoutUserInput[] | VoteUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: VoteCreateOrConnectWithoutUserInput | VoteCreateOrConnectWithoutUserInput[]
+    createMany?: VoteCreateManyUserInputEnvelope
+    connect?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -6211,6 +7487,20 @@ export namespace Prisma {
     deleteMany?: PosteoScalarWhereInput | PosteoScalarWhereInput[]
   }
 
+  export type VoteUpdateManyWithoutUserNestedInput = {
+    create?: XOR<VoteCreateWithoutUserInput, VoteUncheckedCreateWithoutUserInput> | VoteCreateWithoutUserInput[] | VoteUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: VoteCreateOrConnectWithoutUserInput | VoteCreateOrConnectWithoutUserInput[]
+    upsert?: VoteUpsertWithWhereUniqueWithoutUserInput | VoteUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: VoteCreateManyUserInputEnvelope
+    set?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
+    disconnect?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
+    delete?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
+    connect?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
+    update?: VoteUpdateWithWhereUniqueWithoutUserInput | VoteUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: VoteUpdateManyWithWhereWithoutUserInput | VoteUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: VoteScalarWhereInput | VoteScalarWhereInput[]
+  }
+
   export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
@@ -6233,6 +7523,20 @@ export namespace Prisma {
     deleteMany?: PosteoScalarWhereInput | PosteoScalarWhereInput[]
   }
 
+  export type VoteUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<VoteCreateWithoutUserInput, VoteUncheckedCreateWithoutUserInput> | VoteCreateWithoutUserInput[] | VoteUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: VoteCreateOrConnectWithoutUserInput | VoteCreateOrConnectWithoutUserInput[]
+    upsert?: VoteUpsertWithWhereUniqueWithoutUserInput | VoteUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: VoteCreateManyUserInputEnvelope
+    set?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
+    disconnect?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
+    delete?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
+    connect?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
+    update?: VoteUpdateWithWhereUniqueWithoutUserInput | VoteUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: VoteUpdateManyWithWhereWithoutUserInput | VoteUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: VoteScalarWhereInput | VoteScalarWhereInput[]
+  }
+
   export type UserCreateNestedOneWithoutPosteosInput = {
     create?: XOR<UserCreateWithoutPosteosInput, UserUncheckedCreateWithoutPosteosInput>
     connectOrCreate?: UserCreateOrConnectWithoutPosteosInput
@@ -6243,6 +7547,20 @@ export namespace Prisma {
     create?: XOR<ComisionCreateWithoutPosteosInput, ComisionUncheckedCreateWithoutPosteosInput>
     connectOrCreate?: ComisionCreateOrConnectWithoutPosteosInput
     connect?: ComisionWhereUniqueInput
+  }
+
+  export type VoteCreateNestedManyWithoutPostInput = {
+    create?: XOR<VoteCreateWithoutPostInput, VoteUncheckedCreateWithoutPostInput> | VoteCreateWithoutPostInput[] | VoteUncheckedCreateWithoutPostInput[]
+    connectOrCreate?: VoteCreateOrConnectWithoutPostInput | VoteCreateOrConnectWithoutPostInput[]
+    createMany?: VoteCreateManyPostInputEnvelope
+    connect?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
+  }
+
+  export type VoteUncheckedCreateNestedManyWithoutPostInput = {
+    create?: XOR<VoteCreateWithoutPostInput, VoteUncheckedCreateWithoutPostInput> | VoteCreateWithoutPostInput[] | VoteUncheckedCreateWithoutPostInput[]
+    connectOrCreate?: VoteCreateOrConnectWithoutPostInput | VoteCreateOrConnectWithoutPostInput[]
+    createMany?: VoteCreateManyPostInputEnvelope
+    connect?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
   }
 
   export type UserUpdateOneRequiredWithoutPosteosNestedInput = {
@@ -6259,6 +7577,34 @@ export namespace Prisma {
     upsert?: ComisionUpsertWithoutPosteosInput
     connect?: ComisionWhereUniqueInput
     update?: XOR<XOR<ComisionUpdateToOneWithWhereWithoutPosteosInput, ComisionUpdateWithoutPosteosInput>, ComisionUncheckedUpdateWithoutPosteosInput>
+  }
+
+  export type VoteUpdateManyWithoutPostNestedInput = {
+    create?: XOR<VoteCreateWithoutPostInput, VoteUncheckedCreateWithoutPostInput> | VoteCreateWithoutPostInput[] | VoteUncheckedCreateWithoutPostInput[]
+    connectOrCreate?: VoteCreateOrConnectWithoutPostInput | VoteCreateOrConnectWithoutPostInput[]
+    upsert?: VoteUpsertWithWhereUniqueWithoutPostInput | VoteUpsertWithWhereUniqueWithoutPostInput[]
+    createMany?: VoteCreateManyPostInputEnvelope
+    set?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
+    disconnect?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
+    delete?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
+    connect?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
+    update?: VoteUpdateWithWhereUniqueWithoutPostInput | VoteUpdateWithWhereUniqueWithoutPostInput[]
+    updateMany?: VoteUpdateManyWithWhereWithoutPostInput | VoteUpdateManyWithWhereWithoutPostInput[]
+    deleteMany?: VoteScalarWhereInput | VoteScalarWhereInput[]
+  }
+
+  export type VoteUncheckedUpdateManyWithoutPostNestedInput = {
+    create?: XOR<VoteCreateWithoutPostInput, VoteUncheckedCreateWithoutPostInput> | VoteCreateWithoutPostInput[] | VoteUncheckedCreateWithoutPostInput[]
+    connectOrCreate?: VoteCreateOrConnectWithoutPostInput | VoteCreateOrConnectWithoutPostInput[]
+    upsert?: VoteUpsertWithWhereUniqueWithoutPostInput | VoteUpsertWithWhereUniqueWithoutPostInput[]
+    createMany?: VoteCreateManyPostInputEnvelope
+    set?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
+    disconnect?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
+    delete?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
+    connect?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
+    update?: VoteUpdateWithWhereUniqueWithoutPostInput | VoteUpdateWithWhereUniqueWithoutPostInput[]
+    updateMany?: VoteUpdateManyWithWhereWithoutPostInput | VoteUpdateManyWithWhereWithoutPostInput[]
+    deleteMany?: VoteScalarWhereInput | VoteScalarWhereInput[]
   }
 
   export type ComisionCreateNestedManyWithoutMateriaInput = {
@@ -6357,6 +7703,34 @@ export namespace Prisma {
     update?: PosteoUpdateWithWhereUniqueWithoutComisionInput | PosteoUpdateWithWhereUniqueWithoutComisionInput[]
     updateMany?: PosteoUpdateManyWithWhereWithoutComisionInput | PosteoUpdateManyWithWhereWithoutComisionInput[]
     deleteMany?: PosteoScalarWhereInput | PosteoScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutVotosInput = {
+    create?: XOR<UserCreateWithoutVotosInput, UserUncheckedCreateWithoutVotosInput>
+    connectOrCreate?: UserCreateOrConnectWithoutVotosInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type PosteoCreateNestedOneWithoutVotosInput = {
+    create?: XOR<PosteoCreateWithoutVotosInput, PosteoUncheckedCreateWithoutVotosInput>
+    connectOrCreate?: PosteoCreateOrConnectWithoutVotosInput
+    connect?: PosteoWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutVotosNestedInput = {
+    create?: XOR<UserCreateWithoutVotosInput, UserUncheckedCreateWithoutVotosInput>
+    connectOrCreate?: UserCreateOrConnectWithoutVotosInput
+    upsert?: UserUpsertWithoutVotosInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutVotosInput, UserUpdateWithoutVotosInput>, UserUncheckedUpdateWithoutVotosInput>
+  }
+
+  export type PosteoUpdateOneRequiredWithoutVotosNestedInput = {
+    create?: XOR<PosteoCreateWithoutVotosInput, PosteoUncheckedCreateWithoutVotosInput>
+    connectOrCreate?: PosteoCreateOrConnectWithoutVotosInput
+    upsert?: PosteoUpsertWithoutVotosInput
+    connect?: PosteoWhereUniqueInput
+    update?: XOR<XOR<PosteoUpdateToOneWithWhereWithoutVotosInput, PosteoUpdateWithoutVotosInput>, PosteoUncheckedUpdateWithoutVotosInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -6473,22 +7847,20 @@ export namespace Prisma {
   }
 
   export type PosteoCreateWithoutUsuarioInput = {
-    upvotes?: number
-    donwvotes?: number
     titulo: string
     contenido: string
     fecha?: Date | string
     comision: ComisionCreateNestedOneWithoutPosteosInput
+    votos?: VoteCreateNestedManyWithoutPostInput
   }
 
   export type PosteoUncheckedCreateWithoutUsuarioInput = {
     id?: number
-    upvotes?: number
-    donwvotes?: number
     titulo: string
     contenido: string
     fecha?: Date | string
     comisionId: number
+    votos?: VoteUncheckedCreateNestedManyWithoutPostInput
   }
 
   export type PosteoCreateOrConnectWithoutUsuarioInput = {
@@ -6498,6 +7870,27 @@ export namespace Prisma {
 
   export type PosteoCreateManyUsuarioInputEnvelope = {
     data: PosteoCreateManyUsuarioInput | PosteoCreateManyUsuarioInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type VoteCreateWithoutUserInput = {
+    value: number
+    post: PosteoCreateNestedOneWithoutVotosInput
+  }
+
+  export type VoteUncheckedCreateWithoutUserInput = {
+    id?: number
+    value: number
+    postId: number
+  }
+
+  export type VoteCreateOrConnectWithoutUserInput = {
+    where: VoteWhereUniqueInput
+    create: XOR<VoteCreateWithoutUserInput, VoteUncheckedCreateWithoutUserInput>
+  }
+
+  export type VoteCreateManyUserInputEnvelope = {
+    data: VoteCreateManyUserInput | VoteCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -6522,13 +7915,37 @@ export namespace Prisma {
     OR?: PosteoScalarWhereInput[]
     NOT?: PosteoScalarWhereInput | PosteoScalarWhereInput[]
     id?: IntFilter<"Posteo"> | number
-    upvotes?: IntFilter<"Posteo"> | number
-    donwvotes?: IntFilter<"Posteo"> | number
     titulo?: StringFilter<"Posteo"> | string
     contenido?: StringFilter<"Posteo"> | string
     fecha?: DateTimeFilter<"Posteo"> | Date | string
     usuarioId?: IntFilter<"Posteo"> | number
     comisionId?: IntFilter<"Posteo"> | number
+  }
+
+  export type VoteUpsertWithWhereUniqueWithoutUserInput = {
+    where: VoteWhereUniqueInput
+    update: XOR<VoteUpdateWithoutUserInput, VoteUncheckedUpdateWithoutUserInput>
+    create: XOR<VoteCreateWithoutUserInput, VoteUncheckedCreateWithoutUserInput>
+  }
+
+  export type VoteUpdateWithWhereUniqueWithoutUserInput = {
+    where: VoteWhereUniqueInput
+    data: XOR<VoteUpdateWithoutUserInput, VoteUncheckedUpdateWithoutUserInput>
+  }
+
+  export type VoteUpdateManyWithWhereWithoutUserInput = {
+    where: VoteScalarWhereInput
+    data: XOR<VoteUpdateManyMutationInput, VoteUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type VoteScalarWhereInput = {
+    AND?: VoteScalarWhereInput | VoteScalarWhereInput[]
+    OR?: VoteScalarWhereInput[]
+    NOT?: VoteScalarWhereInput | VoteScalarWhereInput[]
+    id?: IntFilter<"Vote"> | number
+    value?: IntFilter<"Vote"> | number
+    userId?: IntFilter<"Vote"> | number
+    postId?: IntFilter<"Vote"> | number
   }
 
   export type UserCreateWithoutPosteosInput = {
@@ -6537,6 +7954,7 @@ export namespace Prisma {
     password: string
     role?: $Enums.Role
     creadoEn?: Date | string
+    votos?: VoteCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPosteosInput = {
@@ -6546,6 +7964,7 @@ export namespace Prisma {
     password: string
     role?: $Enums.Role
     creadoEn?: Date | string
+    votos?: VoteUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPosteosInput = {
@@ -6573,6 +7992,27 @@ export namespace Prisma {
     create: XOR<ComisionCreateWithoutPosteosInput, ComisionUncheckedCreateWithoutPosteosInput>
   }
 
+  export type VoteCreateWithoutPostInput = {
+    value: number
+    user: UserCreateNestedOneWithoutVotosInput
+  }
+
+  export type VoteUncheckedCreateWithoutPostInput = {
+    id?: number
+    value: number
+    userId: number
+  }
+
+  export type VoteCreateOrConnectWithoutPostInput = {
+    where: VoteWhereUniqueInput
+    create: XOR<VoteCreateWithoutPostInput, VoteUncheckedCreateWithoutPostInput>
+  }
+
+  export type VoteCreateManyPostInputEnvelope = {
+    data: VoteCreateManyPostInput | VoteCreateManyPostInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserUpsertWithoutPosteosInput = {
     update: XOR<UserUpdateWithoutPosteosInput, UserUncheckedUpdateWithoutPosteosInput>
     create: XOR<UserCreateWithoutPosteosInput, UserUncheckedCreateWithoutPosteosInput>
@@ -6590,6 +8030,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     creadoEn?: DateTimeFieldUpdateOperationsInput | Date | string
+    votos?: VoteUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPosteosInput = {
@@ -6599,6 +8040,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     creadoEn?: DateTimeFieldUpdateOperationsInput | Date | string
+    votos?: VoteUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ComisionUpsertWithoutPosteosInput = {
@@ -6625,6 +8067,22 @@ export namespace Prisma {
     codigo?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     materiaId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type VoteUpsertWithWhereUniqueWithoutPostInput = {
+    where: VoteWhereUniqueInput
+    update: XOR<VoteUpdateWithoutPostInput, VoteUncheckedUpdateWithoutPostInput>
+    create: XOR<VoteCreateWithoutPostInput, VoteUncheckedCreateWithoutPostInput>
+  }
+
+  export type VoteUpdateWithWhereUniqueWithoutPostInput = {
+    where: VoteWhereUniqueInput
+    data: XOR<VoteUpdateWithoutPostInput, VoteUncheckedUpdateWithoutPostInput>
+  }
+
+  export type VoteUpdateManyWithWhereWithoutPostInput = {
+    where: VoteScalarWhereInput
+    data: XOR<VoteUpdateManyMutationInput, VoteUncheckedUpdateManyWithoutPostInput>
   }
 
   export type ComisionCreateWithoutMateriaInput = {
@@ -6699,22 +8157,20 @@ export namespace Prisma {
   }
 
   export type PosteoCreateWithoutComisionInput = {
-    upvotes?: number
-    donwvotes?: number
     titulo: string
     contenido: string
     fecha?: Date | string
     usuario: UserCreateNestedOneWithoutPosteosInput
+    votos?: VoteCreateNestedManyWithoutPostInput
   }
 
   export type PosteoUncheckedCreateWithoutComisionInput = {
     id?: number
-    upvotes?: number
-    donwvotes?: number
     titulo: string
     contenido: string
     fecha?: Date | string
     usuarioId: number
+    votos?: VoteUncheckedCreateNestedManyWithoutPostInput
   }
 
   export type PosteoCreateOrConnectWithoutComisionInput = {
@@ -6768,43 +8224,187 @@ export namespace Prisma {
     data: XOR<PosteoUpdateManyMutationInput, PosteoUncheckedUpdateManyWithoutComisionInput>
   }
 
+  export type UserCreateWithoutVotosInput = {
+    name: string
+    email: string
+    password: string
+    role?: $Enums.Role
+    creadoEn?: Date | string
+    posteos?: PosteoCreateNestedManyWithoutUsuarioInput
+  }
+
+  export type UserUncheckedCreateWithoutVotosInput = {
+    id?: number
+    name: string
+    email: string
+    password: string
+    role?: $Enums.Role
+    creadoEn?: Date | string
+    posteos?: PosteoUncheckedCreateNestedManyWithoutUsuarioInput
+  }
+
+  export type UserCreateOrConnectWithoutVotosInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutVotosInput, UserUncheckedCreateWithoutVotosInput>
+  }
+
+  export type PosteoCreateWithoutVotosInput = {
+    titulo: string
+    contenido: string
+    fecha?: Date | string
+    usuario: UserCreateNestedOneWithoutPosteosInput
+    comision: ComisionCreateNestedOneWithoutPosteosInput
+  }
+
+  export type PosteoUncheckedCreateWithoutVotosInput = {
+    id?: number
+    titulo: string
+    contenido: string
+    fecha?: Date | string
+    usuarioId: number
+    comisionId: number
+  }
+
+  export type PosteoCreateOrConnectWithoutVotosInput = {
+    where: PosteoWhereUniqueInput
+    create: XOR<PosteoCreateWithoutVotosInput, PosteoUncheckedCreateWithoutVotosInput>
+  }
+
+  export type UserUpsertWithoutVotosInput = {
+    update: XOR<UserUpdateWithoutVotosInput, UserUncheckedUpdateWithoutVotosInput>
+    create: XOR<UserCreateWithoutVotosInput, UserUncheckedCreateWithoutVotosInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutVotosInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutVotosInput, UserUncheckedUpdateWithoutVotosInput>
+  }
+
+  export type UserUpdateWithoutVotosInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    creadoEn?: DateTimeFieldUpdateOperationsInput | Date | string
+    posteos?: PosteoUpdateManyWithoutUsuarioNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutVotosInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    creadoEn?: DateTimeFieldUpdateOperationsInput | Date | string
+    posteos?: PosteoUncheckedUpdateManyWithoutUsuarioNestedInput
+  }
+
+  export type PosteoUpsertWithoutVotosInput = {
+    update: XOR<PosteoUpdateWithoutVotosInput, PosteoUncheckedUpdateWithoutVotosInput>
+    create: XOR<PosteoCreateWithoutVotosInput, PosteoUncheckedCreateWithoutVotosInput>
+    where?: PosteoWhereInput
+  }
+
+  export type PosteoUpdateToOneWithWhereWithoutVotosInput = {
+    where?: PosteoWhereInput
+    data: XOR<PosteoUpdateWithoutVotosInput, PosteoUncheckedUpdateWithoutVotosInput>
+  }
+
+  export type PosteoUpdateWithoutVotosInput = {
+    titulo?: StringFieldUpdateOperationsInput | string
+    contenido?: StringFieldUpdateOperationsInput | string
+    fecha?: DateTimeFieldUpdateOperationsInput | Date | string
+    usuario?: UserUpdateOneRequiredWithoutPosteosNestedInput
+    comision?: ComisionUpdateOneRequiredWithoutPosteosNestedInput
+  }
+
+  export type PosteoUncheckedUpdateWithoutVotosInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    titulo?: StringFieldUpdateOperationsInput | string
+    contenido?: StringFieldUpdateOperationsInput | string
+    fecha?: DateTimeFieldUpdateOperationsInput | Date | string
+    usuarioId?: IntFieldUpdateOperationsInput | number
+    comisionId?: IntFieldUpdateOperationsInput | number
+  }
+
   export type PosteoCreateManyUsuarioInput = {
     id?: number
-    upvotes?: number
-    donwvotes?: number
     titulo: string
     contenido: string
     fecha?: Date | string
     comisionId: number
   }
 
+  export type VoteCreateManyUserInput = {
+    id?: number
+    value: number
+    postId: number
+  }
+
   export type PosteoUpdateWithoutUsuarioInput = {
-    upvotes?: IntFieldUpdateOperationsInput | number
-    donwvotes?: IntFieldUpdateOperationsInput | number
     titulo?: StringFieldUpdateOperationsInput | string
     contenido?: StringFieldUpdateOperationsInput | string
     fecha?: DateTimeFieldUpdateOperationsInput | Date | string
     comision?: ComisionUpdateOneRequiredWithoutPosteosNestedInput
+    votos?: VoteUpdateManyWithoutPostNestedInput
   }
 
   export type PosteoUncheckedUpdateWithoutUsuarioInput = {
     id?: IntFieldUpdateOperationsInput | number
-    upvotes?: IntFieldUpdateOperationsInput | number
-    donwvotes?: IntFieldUpdateOperationsInput | number
+    titulo?: StringFieldUpdateOperationsInput | string
+    contenido?: StringFieldUpdateOperationsInput | string
+    fecha?: DateTimeFieldUpdateOperationsInput | Date | string
+    comisionId?: IntFieldUpdateOperationsInput | number
+    votos?: VoteUncheckedUpdateManyWithoutPostNestedInput
+  }
+
+  export type PosteoUncheckedUpdateManyWithoutUsuarioInput = {
+    id?: IntFieldUpdateOperationsInput | number
     titulo?: StringFieldUpdateOperationsInput | string
     contenido?: StringFieldUpdateOperationsInput | string
     fecha?: DateTimeFieldUpdateOperationsInput | Date | string
     comisionId?: IntFieldUpdateOperationsInput | number
   }
 
-  export type PosteoUncheckedUpdateManyWithoutUsuarioInput = {
+  export type VoteUpdateWithoutUserInput = {
+    value?: IntFieldUpdateOperationsInput | number
+    post?: PosteoUpdateOneRequiredWithoutVotosNestedInput
+  }
+
+  export type VoteUncheckedUpdateWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
-    upvotes?: IntFieldUpdateOperationsInput | number
-    donwvotes?: IntFieldUpdateOperationsInput | number
-    titulo?: StringFieldUpdateOperationsInput | string
-    contenido?: StringFieldUpdateOperationsInput | string
-    fecha?: DateTimeFieldUpdateOperationsInput | Date | string
-    comisionId?: IntFieldUpdateOperationsInput | number
+    value?: IntFieldUpdateOperationsInput | number
+    postId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type VoteUncheckedUpdateManyWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    value?: IntFieldUpdateOperationsInput | number
+    postId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type VoteCreateManyPostInput = {
+    id?: number
+    value: number
+    userId: number
+  }
+
+  export type VoteUpdateWithoutPostInput = {
+    value?: IntFieldUpdateOperationsInput | number
+    user?: UserUpdateOneRequiredWithoutVotosNestedInput
+  }
+
+  export type VoteUncheckedUpdateWithoutPostInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    value?: IntFieldUpdateOperationsInput | number
+    userId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type VoteUncheckedUpdateManyWithoutPostInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    value?: IntFieldUpdateOperationsInput | number
+    userId?: IntFieldUpdateOperationsInput | number
   }
 
   export type ComisionCreateManyMateriaInput = {
@@ -6838,8 +8438,6 @@ export namespace Prisma {
 
   export type PosteoCreateManyComisionInput = {
     id?: number
-    upvotes?: number
-    donwvotes?: number
     titulo: string
     contenido: string
     fecha?: Date | string
@@ -6847,28 +8445,24 @@ export namespace Prisma {
   }
 
   export type PosteoUpdateWithoutComisionInput = {
-    upvotes?: IntFieldUpdateOperationsInput | number
-    donwvotes?: IntFieldUpdateOperationsInput | number
     titulo?: StringFieldUpdateOperationsInput | string
     contenido?: StringFieldUpdateOperationsInput | string
     fecha?: DateTimeFieldUpdateOperationsInput | Date | string
     usuario?: UserUpdateOneRequiredWithoutPosteosNestedInput
+    votos?: VoteUpdateManyWithoutPostNestedInput
   }
 
   export type PosteoUncheckedUpdateWithoutComisionInput = {
     id?: IntFieldUpdateOperationsInput | number
-    upvotes?: IntFieldUpdateOperationsInput | number
-    donwvotes?: IntFieldUpdateOperationsInput | number
     titulo?: StringFieldUpdateOperationsInput | string
     contenido?: StringFieldUpdateOperationsInput | string
     fecha?: DateTimeFieldUpdateOperationsInput | Date | string
     usuarioId?: IntFieldUpdateOperationsInput | number
+    votos?: VoteUncheckedUpdateManyWithoutPostNestedInput
   }
 
   export type PosteoUncheckedUpdateManyWithoutComisionInput = {
     id?: IntFieldUpdateOperationsInput | number
-    upvotes?: IntFieldUpdateOperationsInput | number
-    donwvotes?: IntFieldUpdateOperationsInput | number
     titulo?: StringFieldUpdateOperationsInput | string
     contenido?: StringFieldUpdateOperationsInput | string
     fecha?: DateTimeFieldUpdateOperationsInput | Date | string

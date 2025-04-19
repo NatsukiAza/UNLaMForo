@@ -5,7 +5,7 @@ import { authOptions } from "@/lib/auth";
 import { Roboto } from "next/font/google";
 import CerrarSesion from "./signOut";
 const roboto = Roboto({
-  weight: ["100", "200", "400", "600", "800", "900"],
+  weight: ["200", "400", "600"],
   subsets: ["latin"],
 });
 
@@ -51,18 +51,16 @@ export default async function Header() {
           <Link href="/">
             <i
               className="material-icons px-3 py-2 cursor-pointer trans hover:bg-[rgba(0,0,0,0.1)]"
-              aria-hidden="true"
+              aria-label="inicio"
             >
               home
             </i>
           </Link>
-          <a href=""></a>
-          <a href=""></a>
         </div>
         <button>
           <span
             className="material-icons px-3 py-2 cursor-pointer trans hover:bg-[rgba(0,0,0,0.1)]"
-            aria-hidden="true"
+            aria-label="modo oscuro"
           >
             brightness_4
           </span>

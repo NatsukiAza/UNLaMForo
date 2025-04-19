@@ -128,8 +128,6 @@ exports.Prisma.UserScalarFieldEnum = {
 
 exports.Prisma.PosteoScalarFieldEnum = {
   id: 'id',
-  upvotes: 'upvotes',
-  donwvotes: 'donwvotes',
   titulo: 'titulo',
   contenido: 'contenido',
   fecha: 'fecha',
@@ -150,6 +148,13 @@ exports.Prisma.ComisionScalarFieldEnum = {
   codigo: 'codigo',
   createdAt: 'createdAt',
   materiaId: 'materiaId'
+};
+
+exports.Prisma.VoteScalarFieldEnum = {
+  id: 'id',
+  value: 'value',
+  userId: 'userId',
+  postId: 'postId'
 };
 
 exports.Prisma.SortOrder = {
@@ -184,7 +189,8 @@ exports.Prisma.ModelName = {
   User: 'User',
   Posteo: 'Posteo',
   Materia: 'Materia',
-  Comision: 'Comision'
+  Comision: 'Comision',
+  Vote: 'Vote'
 };
 
 /**

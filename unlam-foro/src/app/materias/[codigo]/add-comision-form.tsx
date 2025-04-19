@@ -39,7 +39,10 @@ export default function AddComision({ materiaId }: Props) {
 
   return (
     <div>
-      <button onClick={() => setShowForm(!showForm)}>
+      <button
+        onClick={() => setShowForm(!showForm)}
+        className="p-2 border-1 border-[#000] rounded-xl"
+      >
         {showForm ? "Cancelar" : "Agregar comisión"}
       </button>
 
@@ -85,7 +88,7 @@ export default function AddComision({ materiaId }: Props) {
 
           <button
             type="submit"
-            className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+            className="bg-[#009674] text-white px-4 py-2 rounded hover:bg-black hover:"
           >
             Crear comisión
           </button>

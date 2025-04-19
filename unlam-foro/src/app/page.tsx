@@ -3,7 +3,7 @@ import { db } from "@/lib/db";
 import Link from "next/link";
 import { Roboto } from "next/font/google";
 const roboto = Roboto({
-  weight: ["100", "200", "300", "400", "600", "800", "900"],
+  weight: ["200", "300", "600"],
   subsets: ["latin"],
 });
 
@@ -16,19 +16,14 @@ export default async function Home() {
     switch (anio) {
       case 1:
         return "Primer Año";
-        break;
       case 2:
         return "Segundo Año";
-        break;
       case 3:
         return "Tercer Año";
-        break;
       case 4:
         return "Cuarto Año";
-        break;
       case 5:
         return "Quinto Año";
-        break;
     }
   };
 
@@ -37,8 +32,8 @@ export default async function Home() {
       <Header></Header>
       <section className={`flex ${roboto.className}`}>
         <div className="border-r-1 border-[] hidden"></div>
-        <div className="p-4 w-full">
-          <h2 className="text-3xl font-extralight mt-2">Materias</h2>
+        <div className="p-5 w-full">
+          <h2 className="text-3xl font-extralight">Materias</h2>
           <ul className="flex flex-col gap-4 mt-6 w-full">
             {materias.map((materia) => (
               <li
@@ -60,7 +55,7 @@ export default async function Home() {
                 >
                   <i
                     className="material-icons text-4xl! text-[#555]!"
-                    aria-hidden="true"
+                    aria-label={`foro ${materia.name}`}
                   >
                     forum
                   </i>
