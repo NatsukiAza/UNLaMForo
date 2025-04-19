@@ -32,7 +32,7 @@ export default function PostList({
 
   useEffect(() => {
     window.__refreshPostList = refresh;
-  }, []);
+  }, [refresh]);
 
   const handleVote = async (postId: number, value: number) => {
     await fetch("/api/auth/posts/vote", {
