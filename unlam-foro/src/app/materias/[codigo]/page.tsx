@@ -11,11 +11,11 @@ const roboto = Roboto({
   subsets: ["latin"],
 });
 
-type PageParams = {
-  params: { codigo: string };
-};
-
-export default async function MateriaPage({ params }: PageParams) {
+export default async function MateriaPage({
+  params,
+}: {
+  params: Promise<{ codigo: string }>;
+}) {
   const { codigo } = await params;
 
   const codigoNumerico = parseInt(codigo);
