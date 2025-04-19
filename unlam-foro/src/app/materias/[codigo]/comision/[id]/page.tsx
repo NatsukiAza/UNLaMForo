@@ -10,7 +10,7 @@ type PageParams = {
 };
 
 export default async function ComisionPage({ params }: PageParams) {
-  const { id } = await params;
+  const { id } = params;
   const idNumerico = parseInt(id);
 
   if (isNaN(idNumerico)) return notFound();
