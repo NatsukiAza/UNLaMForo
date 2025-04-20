@@ -62,6 +62,7 @@ export async function POST(req: Request){
 
     return NextResponse.json({ message: "Voto procesado correctamente" });
   }catch (error) {
+    console.log(error)
     return NextResponse.json({ message: "Error al votar" }, {status: 500});
 } 
 }
