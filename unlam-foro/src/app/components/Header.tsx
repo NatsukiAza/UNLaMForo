@@ -11,6 +11,7 @@ const roboto = Roboto({
 
 export default async function Header() {
   const session = await getServerSession(authOptions);
+  const signInUrl = `${process.env.NEXTAUTH_URL}/sign_in`;
 
   return (
     <header className={`${roboto.className}`}>
@@ -26,9 +27,16 @@ export default async function Header() {
         <div className="flex items-center gap-4">
           <div>
             <h1 className="text-right">
-              {session?.user.name
-                ? `${session.user.name}`
-                : "No has iniciado sesion"}
+              {session?.user.name ? (
+                `${session.user.name}`
+              ) : (
+                <Link
+                  href={signInUrl}
+                  className="rounded-lg bg-[#009674] px-3 py-2 text-sm text-white"
+                >
+                  Iniciar Sesion
+                </Link>
+              )}
             </h1>
             {session && (
               <div className="flex gap-4 text-[#009674] text-xs font-semibold whitespace-nowrap">

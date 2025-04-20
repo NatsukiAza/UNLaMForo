@@ -3,5 +3,9 @@
 import { signOut } from "next-auth/react";
 
 export default function CerrarSesion() {
-  return <button onClick={() => signOut()}>Cerrar Sesion</button>;
+  return (
+    <button className="cursor-pointer" onClick={() => signOut()}>
+      Cerrar Sesion
+    </button>
+  );
 }
