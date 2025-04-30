@@ -52,6 +52,7 @@ export default function AddPost({
           value={titulo}
           onChange={(e) => setTitulo(e.target.value)}
           placeholder="Titulo"
+          maxLength={250}
           required
         />
 
@@ -60,7 +61,7 @@ export default function AddPost({
           value={contenido}
           onChange={(e) => setContenido(e.target.value)}
           placeholder="Escribí tu experiencia..."
-          maxLength={3000}
+          maxLength={4000}
           required
         ></textarea>
 
