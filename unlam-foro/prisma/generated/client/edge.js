@@ -203,11 +203,12 @@ const config = {
     "db"
   ],
   "activeProvider": "mysql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "mysql://root:wfumSPTCGrGOhynwLEvjjifTOqyBodlE@turntable.proxy.rlwy.net:17088/railway"
+        "value": null
       }
     }
   },
