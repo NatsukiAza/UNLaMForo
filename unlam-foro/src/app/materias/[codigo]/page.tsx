@@ -45,7 +45,7 @@ export default async function MateriaPage({
           {materia.comision.length === 0 ? (
             <p>Aún no hay comisiones para esta materia.</p>
           ) : (
-            <ul>
+            <ul className="flex flex-col gap-4">
               {materia.comision.map((c) => (
                 <li key={c.id} className="bg-[#eee] flex flex-col sm:flex-row">
                   <div className="pl-5 py-2">
@@ -53,7 +53,7 @@ export default async function MateriaPage({
                       {c.codigo}
                     </h3>
                     {c.profes && (
-                      <p className="text-xs font-semibold">
+                      <p className="max-w-[308px] text-xs font-semibold">
                         Profesores: {c.profes}
                       </p>
                     )}
