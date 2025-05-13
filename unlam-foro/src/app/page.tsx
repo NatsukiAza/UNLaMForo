@@ -9,7 +9,7 @@ const roboto = Roboto({
 
 export default async function Home() {
   const materias = await db.materia.findMany({
-    orderBy: { anio: "asc" },
+    orderBy: { codigo: "asc" },
   });
 
   return (
