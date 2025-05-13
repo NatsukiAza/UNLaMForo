@@ -73,6 +73,7 @@ export default function AddComision({ materiaId }: Props) {
               <option value="5300">5300</option>
               <option value="5600">5600</option>
               <option value="5900">5900</option>
+              <option value="5900">6300</option>
             </select>
           </div>
 
