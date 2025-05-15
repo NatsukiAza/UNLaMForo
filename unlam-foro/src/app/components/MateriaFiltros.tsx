@@ -39,7 +39,14 @@ export default function MateriaListaConFiltros({
 
   return (
     <section className="flex flex-row">
-      <div className="border-r-1 border-[#E2E7E7] hidden md:flex flex-col p-5 gap-5">
+      <div
+        className="size-full absolute bg-[#fff0] z-2 trans"
+        id="filterfondo"
+      ></div>
+      <div
+        className="border-r-1 border-[#E2E7E7] bg-[#fff] absolute flex-col p-5 gap-5 h-full -ml-58 md:ml-0 md:static trans z-3"
+        id="filter"
+      >
         <h3 className="text-3xl font-extralight w-[190px]">Filtros</h3>
         <div className="flex flex-col gap-2">
           <div className="flex gap-2">
@@ -77,7 +84,7 @@ export default function MateriaListaConFiltros({
               className="bgcont flex flex-col sm:flex-row"
             >
               <div className="flex flex-col py-2 pl-5">
-                <h3 className="font-semibold text-base w-[350px]">
+                <h3 className="font-semibold text-base w-[300px] sm:w-[350px]">
                   {materia.name}
                 </h3>
                 <p className="text-xs font-semibold">
