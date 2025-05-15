@@ -6,6 +6,7 @@ export default function FilterButton() {
     const sliderBg = document.getElementById("filterfondo");
     sliderOptions?.classList.toggle("ml-0!");
     sliderBg?.classList.toggle("bg-[#0005]!");
+    sliderBg?.classList.toggle("hidden");
   };
   return (
     <button

@@ -40,7 +40,7 @@ export default function MateriaListaConFiltros({
   return (
     <section className="flex flex-row">
       <div
-        className="size-full absolute bg-[#fff0] z-2 trans"
+        className="size-full absolute bg-[#fff0] z-2 trans hidden"
         id="filterfondo"
       ></div>
       <div
