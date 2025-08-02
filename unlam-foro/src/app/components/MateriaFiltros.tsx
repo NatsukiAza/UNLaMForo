@@ -54,7 +54,7 @@ export default function MateriaListaConFiltros({
         id="filterfondo"
       ></div>
       <div
-        className="border-r-1 border-[#E2E7E7] bg-[#fff] absolute flex-col p-5 gap-5 h-full -ml-58 md:ml-0 md:static trans z-3"
+        className="border-r-1 border-[#E2E7E7] bg-[#fff] absolute flex-col p-5 gap-5 h-full -ml-61 md:ml-0 md:static trans z-3"
         id="filter"
       >
         <h3 className="text-3xl font-extralight w-[190px]">Filtros</h3>
