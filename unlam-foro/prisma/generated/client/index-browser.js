@@ -123,7 +123,10 @@ exports.Prisma.UserScalarFieldEnum = {
   email: 'email',
   password: 'password',
   role: 'role',
-  creadoEn: 'creadoEn'
+  creadoEn: 'creadoEn',
+  resetToken: 'resetToken',
+  resetTokenExpiry: 'resetTokenExpiry',
+  resetTokenCreatedAt: 'resetTokenCreatedAt'
 };
 
 exports.Prisma.PosteoScalarFieldEnum = {
@@ -131,6 +134,7 @@ exports.Prisma.PosteoScalarFieldEnum = {
   titulo: 'titulo',
   contenido: 'contenido',
   fecha: 'fecha',
+  anonymousId: 'anonymousId',
   usuarioId: 'usuarioId',
   comisionId: 'comisionId'
 };
@@ -162,15 +166,22 @@ exports.Prisma.SortOrder = {
   desc: 'desc'
 };
 
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+
 exports.Prisma.UserOrderByRelevanceFieldEnum = {
   name: 'name',
   email: 'email',
-  password: 'password'
+  password: 'password',
+  resetToken: 'resetToken'
 };
 
 exports.Prisma.PosteoOrderByRelevanceFieldEnum = {
   titulo: 'titulo',
-  contenido: 'contenido'
+  contenido: 'contenido',
+  anonymousId: 'anonymousId'
 };
 
 exports.Prisma.MateriaOrderByRelevanceFieldEnum = {

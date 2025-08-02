@@ -1,25 +1,19 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useState, useCallback, useImperativeHandle, forwardRef } from "react";
+import { Post } from "@/app/types/global";
 
-type Posteo = {
-  id: number;
-  titulo: string;
-  contenido: string;
-  fecha: Date;
-  votos: { value: number }[];
-  usuario: {
-    name: string;
-  };
-};
+export interface PostListRef {
+  refresh: () => void;
+}
 
-export default function PostList({
-  comisionId,
-  initialPosts,
-}: {
-  comisionId: number;
-  initialPosts: Posteo[];
-}) {
+const PostList = forwardRef<
+  PostListRef,
+  {
+    comisionId: number;
+    initialPosts: Post[];
+  }
+>(({ comisionId, initialPosts }, ref) => {
   const [posteos, setPosts] = useState(initialPosts);
 
   const fetchPosts = useCallback(async () => {
@@ -30,9 +24,14 @@ export default function PostList({
 
   const refresh = useCallback(() => fetchPosts(), [fetchPosts]);
 
-  useEffect(() => {
-    window.__refreshPostList = refresh;
-  }, [refresh]);
+  // Expose refresh function to parent
+  useImperativeHandle(
+    ref,
+    () => ({
+      refresh,
+    }),
+    [refresh]
+  );
 
   const handleVote = async (postId: number, value: number) => {
     await fetch("/api/auth/posts/vote", {
@@ -53,11 +52,13 @@ export default function PostList({
       {posteos.map((p) => {
         const upvotes = p.votos.filter((v) => v.value === 1).length;
         const downvotes = p.votos.filter((v) => v.value === -1).length;
+        const isAnonymous = !p.usuario && p.anonymousId;
+
         return (
           <li key={p.id} className="bg-[#eee] flex flex-col gap-2 px-5 py-2">
             <div className="flex gap-5 items-center justify-between">
               <h3 className="font-bold text-xl text-[#009674]">
-                {p.usuario.name || "Usuario"}{" "}
+                {isAnonymous ? "Anónimo" : p.usuario?.name || "Usuario"}{" "}
               </h3>
               <p className="text-sm">
                 {new Date(p.fecha).toLocaleString("es-AR", {
@@ -92,4 +93,8 @@ export default function PostList({
       })}
     </ul>
   );
-}
+});
+
+PostList.displayName = "PostList";
+
+export default PostList;
