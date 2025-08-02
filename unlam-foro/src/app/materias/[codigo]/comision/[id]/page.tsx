@@ -21,9 +21,12 @@ export default async function ComisionPage({
       include: {
         posteos: {
           include: {
-            usuario: { select: { name: true } },
+            usuario: {
+              select: { name: true },
+            },
             votos: true,
           },
+          orderBy: { fecha: "desc" },
         },
       },
     }),

@@ -23,6 +23,7 @@ export default function MateriaListaConFiltros({
   materias: Materia[];
 }) {
   const [filtros, setFiltros] = useState<number[]>([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const toggleFiltro = (anio: number) => {
     setFiltros((prev) =>
@@ -30,10 +31,19 @@ export default function MateriaListaConFiltros({
     );
   };
 
-  const materiasFiltradas =
-    filtros.length === 0
-      ? materias
-      : materias.filter((m) => filtros.includes(m.anio));
+  const materiasFiltradas = materias.filter((materia) => {
+    // Filter by year
+    const passesYearFilter =
+      filtros.length === 0 || filtros.includes(materia.anio);
+
+    // Filter by search term
+    const passesSearchFilter =
+      searchTerm === "" ||
+      materia.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      materia.codigo.toString().includes(searchTerm);
+
+    return passesYearFilter && passesSearchFilter;
+  });
 
   const añosDisponibles = [...new Set(materias.map((m) => m.anio))].sort();
 
@@ -48,6 +58,27 @@ export default function MateriaListaConFiltros({
         id="filter"
       >
         <h3 className="text-3xl font-extralight w-[190px]">Filtros</h3>
+
+        {/* Search Bar */}
+        <div className="flex flex-col gap-2">
+          <div className="flex gap-2">
+            <i
+              className="material-icons text-[#aaa]!"
+              aria-label="Buscar materia"
+            >
+              search
+            </i>
+            <p className="text-md font-base">Buscar:</p>
+          </div>
+          <input
+            type="text"
+            placeholder="Buscar por nombre o código..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="w-full px-3 py-2 border border-[#E2E7E7] rounded-md focus:outline-none focus:ring-2 focus:ring-[#009674] focus:border-transparent"
+          />
+        </div>
+
         <div className="flex flex-col gap-2">
           <div className="flex gap-2">
             <i
@@ -77,36 +108,42 @@ export default function MateriaListaConFiltros({
       </div>
       <div className="p-5 w-full">
         <h2 className="text-3xl font-extralight">Materias</h2>
-        <ul className="flex flex-col gap-4 mt-6 w-full">
-          {materiasFiltradas.map((materia) => (
-            <li
-              key={materia.codigo}
-              className="bgcont flex flex-col sm:flex-row"
-            >
-              <div className="flex flex-col py-2 pl-5">
-                <h3 className="font-semibold text-base w-[300px] sm:w-[350px]">
-                  {materia.name}
-                </h3>
-                <p className="text-xs font-semibold">
-                  {materia.codigo} - {etiquetasAnios[materia.anio]}
-                </p>
-              </div>
-
-              <Link
-                href={`/materias/${materia.codigo}`}
-                className="w-[86px] flex flex-col items-center py-2 hover:bg-[#c4bfbf]"
+        {materiasFiltradas.length === 0 ? (
+          <p className="text-gray-500 mt-6">
+            No se encontraron materias que coincidan con los filtros.
+          </p>
+        ) : (
+          <ul className="flex flex-col gap-4 mt-6 w-full">
+            {materiasFiltradas.map((materia) => (
+              <li
+                key={materia.codigo}
+                className="bgcont flex flex-col sm:flex-row"
               >
-                <i
-                  className="material-icons text-4xl! text-[#555]!"
-                  aria-label={`foro ${materia.name}`}
+                <div className="flex flex-col py-2 pl-5">
+                  <h3 className="font-semibold text-base w-[300px] sm:w-[350px]">
+                    {materia.name}
+                  </h3>
+                  <p className="text-xs font-semibold">
+                    {materia.codigo} - {etiquetasAnios[materia.anio]}
+                  </p>
+                </div>
+
+                <Link
+                  href={`/materias/${materia.codigo}`}
+                  className="w-[86px] flex flex-col items-center py-2 hover:bg-[#c4bfbf]"
                 >
-                  forum
-                </i>
-                <p className="font-light text-xs text-center">Foro</p>
-              </Link>
-            </li>
-          ))}
-        </ul>
+                  <i
+                    className="material-icons text-4xl! text-[#555]!"
+                    aria-label={`foro ${materia.name}`}
+                  >
+                    forum
+                  </i>
+                  <p className="font-light text-xs text-center">Foro</p>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </section>
   );

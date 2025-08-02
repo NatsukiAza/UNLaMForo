@@ -23,6 +23,11 @@ model User {
   creadoEn  DateTime  @default(now())
   posteos   Posteo[]
   votos     Vote[]
+  
+  // Password reset fields
+  resetToken         String?
+  resetTokenExpiry   DateTime?
+  resetTokenCreatedAt DateTime?
 }
 
 enum Role {
@@ -35,11 +40,12 @@ model Posteo {
   titulo      String    @db.VarChar(255)
   contenido   String    @db.VarChar(5000)
   fecha       DateTime  @default(now())
-
-  usuarioId   Int
+  anonymousId String?   
+     
+  usuarioId   Int?
   comisionId  Int
 
-  usuario     User   @relation(fields: [usuarioId], references: [id])
+  usuario     User?   @relation(fields: [usuarioId], references: [id])
   comision    Comision  @relation(fields: [comisionId], references: [id])
 
   votos       Vote[]

@@ -1,8 +1,6 @@
 "use client";
 
-import { signIn } from "next-auth/react";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Roboto } from "next/font/google";
 import Link from "next/link";
@@ -12,32 +10,46 @@ const roboto = Roboto({
   subsets: ["latin"],
 });
 
-export default function LoginPage() {
-  const router = useRouter();
-
+export default function ForgotPasswordPage() {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
+    setMessage("");
 
-    const res = await signIn("credentials", {
-      email,
-      password,
-      redirect: false,
-    });
+    try {
+      const res = await fetch("/api/auth/forgot-password", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
 
-    if (res?.ok) {
-      router.push("/");
-    } else {
-      setError("Email o contraseña incorrectos");
+      const data = await res.json();
+
+      if (res.ok) {
+        setMessage(
+          "Se ha enviado un correo con las instrucciones para restablecer tu contraseña."
+        );
+      } else {
+        setMessage(
+          data.error || "Error al enviar el correo. Intenta nuevamente."
+        );
+      }
+    } catch {
+      setMessage("Error de conexión. Intenta nuevamente.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
     <div
-      className={`flex flex-col h-screen  bg-[#009674] text-white ${roboto.className}`}
+      className={`flex flex-col h-screen bg-[#009674] text-white ${roboto.className}`}
     >
       <header className="bg-[rgba(0,0,0,0.75)] h-20 flex px-4 items-center">
         <div>
@@ -52,61 +64,54 @@ export default function LoginPage() {
       <section className="size-full bg-gradient-to-br from-[#009674] to-[#63cb5f] flex flex-col-reverse md:flex-row justify-center items-center gap-9 max-md:px-5">
         <div className="hidden md:flex flex-col">
           <h1 className="text-5xl/14 lg:text-6xl/17 font-bold w-90 lg:w-120 tracking-wider">
-            Opiniones de Alumnos sobre Comisiones
+            Recuperar Contraseña
           </h1>
           <h3 className="text-2xl lg:text-3xl font-thin w-90 lg:w-120 xl:w-150 tracking-wider">
-            Plataforma para alumnos de opiniones sobre comisiones que ofrecen en
-            la Universidad Nacional de La Matanza
+            Ingresa tu correo electrónico para recibir instrucciones de
+            recuperación
           </h3>
         </div>
         <div className="p-7 bg-[rgba(0,0,0,0.08)] rounded-lg max-md:w-full">
           <h2 className="text-3xl mb-5 text-center font-thin tracking-wider">
-            ¡Buenos días!
+            ¿Olvidaste tu contraseña?
           </h2>
           <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full">
             <div className="flex flex-col">
-              <label>Correo:</label>
+              <label>Correo electrónico:</label>
               <input
                 type="email"
                 className="trans border-1 w-full md:w-75 lg:w-100 p-2 border-[rgba(255,255,255,0.5)] bg-[rgba(0,0,0,0.08)] hover:bg-[rgba(0,0,0,0.2)] rounded-sm backdrop-blur-xl"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-              />
-            </div>
-            <div className="flex flex-col">
-              <label>Contraseña:</label>
-              <input
-                type="password"
-                className="trans border-1 w-full md:w-75 lg:w-100 p-2 border-[rgba(255,255,255,0.5)] bg-[rgba(0,0,0,0.08)] hover:bg-[rgba(0,0,0,0.2)] rounded-sm backdrop-blur-xl"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
+                disabled={isLoading}
               />
             </div>
 
-            {error && <p className="text-red-300 text-sm">{error}</p>}
+            {message && (
+              <p
+                className={`text-sm ${
+                  message.includes("Error") ? "text-red-300" : "text-green-300"
+                }`}
+              >
+                {message}
+              </p>
+            )}
 
             <button
               type="submit"
-              className="bg-white text-[#009674] rounded-sm p-2 cursor-pointer"
+              className="bg-white text-[#009674] rounded-sm p-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+              disabled={isLoading}
             >
-              Ingresar
+              {isLoading ? "Enviando..." : "Enviar instrucciones"}
             </button>
           </form>
-
-          <div className="flex flex-col gap-3 mt-5 pt-5 border-t-1 border-[rgba(255,255,255,0.3)]">
+          <div className="flex mt-5 pt-5 border-t-1 border-[rgba(255,255,255,0.3)]">
             <Link
-              href="/forgot-password"
-              className="text-center text-sm hover:underline"
-            >
-              ¿Olvidaste tu contraseña?
-            </Link>
-            <Link
-              href="../sign_up"
+              href="/sign_in"
               className="bg-[rgba(255,255,255,0.2)] rounded-sm p-2 w-full text-center"
             >
-              Registrarse
+              Volver al login
             </Link>
           </div>
         </div>

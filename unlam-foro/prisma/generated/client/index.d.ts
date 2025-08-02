@@ -1369,6 +1369,9 @@ export namespace Prisma {
     password: string | null
     role: $Enums.Role | null
     creadoEn: Date | null
+    resetToken: string | null
+    resetTokenExpiry: Date | null
+    resetTokenCreatedAt: Date | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -1378,6 +1381,9 @@ export namespace Prisma {
     password: string | null
     role: $Enums.Role | null
     creadoEn: Date | null
+    resetToken: string | null
+    resetTokenExpiry: Date | null
+    resetTokenCreatedAt: Date | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -1387,6 +1393,9 @@ export namespace Prisma {
     password: number
     role: number
     creadoEn: number
+    resetToken: number
+    resetTokenExpiry: number
+    resetTokenCreatedAt: number
     _all: number
   }
 
@@ -1406,6 +1415,9 @@ export namespace Prisma {
     password?: true
     role?: true
     creadoEn?: true
+    resetToken?: true
+    resetTokenExpiry?: true
+    resetTokenCreatedAt?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -1415,6 +1427,9 @@ export namespace Prisma {
     password?: true
     role?: true
     creadoEn?: true
+    resetToken?: true
+    resetTokenExpiry?: true
+    resetTokenCreatedAt?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -1424,6 +1439,9 @@ export namespace Prisma {
     password?: true
     role?: true
     creadoEn?: true
+    resetToken?: true
+    resetTokenExpiry?: true
+    resetTokenCreatedAt?: true
     _all?: true
   }
 
@@ -1520,6 +1538,9 @@ export namespace Prisma {
     password: string
     role: $Enums.Role
     creadoEn: Date
+    resetToken: string | null
+    resetTokenExpiry: Date | null
+    resetTokenCreatedAt: Date | null
     _count: UserCountAggregateOutputType | null
     _avg: UserAvgAggregateOutputType | null
     _sum: UserSumAggregateOutputType | null
@@ -1548,6 +1569,9 @@ export namespace Prisma {
     password?: boolean
     role?: boolean
     creadoEn?: boolean
+    resetToken?: boolean
+    resetTokenExpiry?: boolean
+    resetTokenCreatedAt?: boolean
     posteos?: boolean | User$posteosArgs<ExtArgs>
     votos?: boolean | User$votosArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -1562,9 +1586,12 @@ export namespace Prisma {
     password?: boolean
     role?: boolean
     creadoEn?: boolean
+    resetToken?: boolean
+    resetTokenExpiry?: boolean
+    resetTokenCreatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "password" | "role" | "creadoEn", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "password" | "role" | "creadoEn" | "resetToken" | "resetTokenExpiry" | "resetTokenCreatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     posteos?: boolean | User$posteosArgs<ExtArgs>
     votos?: boolean | User$votosArgs<ExtArgs>
@@ -1584,6 +1611,9 @@ export namespace Prisma {
       password: string
       role: $Enums.Role
       creadoEn: Date
+      resetToken: string | null
+      resetTokenExpiry: Date | null
+      resetTokenCreatedAt: Date | null
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -1961,6 +1991,9 @@ export namespace Prisma {
     readonly password: FieldRef<"User", 'String'>
     readonly role: FieldRef<"User", 'Role'>
     readonly creadoEn: FieldRef<"User", 'DateTime'>
+    readonly resetToken: FieldRef<"User", 'String'>
+    readonly resetTokenExpiry: FieldRef<"User", 'DateTime'>
+    readonly resetTokenCreatedAt: FieldRef<"User", 'DateTime'>
   }
     
 
@@ -2399,6 +2432,7 @@ export namespace Prisma {
     titulo: string | null
     contenido: string | null
     fecha: Date | null
+    anonymousId: string | null
     usuarioId: number | null
     comisionId: number | null
   }
@@ -2408,6 +2442,7 @@ export namespace Prisma {
     titulo: string | null
     contenido: string | null
     fecha: Date | null
+    anonymousId: string | null
     usuarioId: number | null
     comisionId: number | null
   }
@@ -2417,6 +2452,7 @@ export namespace Prisma {
     titulo: number
     contenido: number
     fecha: number
+    anonymousId: number
     usuarioId: number
     comisionId: number
     _all: number
@@ -2440,6 +2476,7 @@ export namespace Prisma {
     titulo?: true
     contenido?: true
     fecha?: true
+    anonymousId?: true
     usuarioId?: true
     comisionId?: true
   }
@@ -2449,6 +2486,7 @@ export namespace Prisma {
     titulo?: true
     contenido?: true
     fecha?: true
+    anonymousId?: true
     usuarioId?: true
     comisionId?: true
   }
@@ -2458,6 +2496,7 @@ export namespace Prisma {
     titulo?: true
     contenido?: true
     fecha?: true
+    anonymousId?: true
     usuarioId?: true
     comisionId?: true
     _all?: true
@@ -2554,7 +2593,8 @@ export namespace Prisma {
     titulo: string
     contenido: string
     fecha: Date
-    usuarioId: number
+    anonymousId: string | null
+    usuarioId: number | null
     comisionId: number
     _count: PosteoCountAggregateOutputType | null
     _avg: PosteoAvgAggregateOutputType | null
@@ -2582,9 +2622,10 @@ export namespace Prisma {
     titulo?: boolean
     contenido?: boolean
     fecha?: boolean
+    anonymousId?: boolean
     usuarioId?: boolean
     comisionId?: boolean
-    usuario?: boolean | UserDefaultArgs<ExtArgs>
+    usuario?: boolean | Posteo$usuarioArgs<ExtArgs>
     comision?: boolean | ComisionDefaultArgs<ExtArgs>
     votos?: boolean | Posteo$votosArgs<ExtArgs>
     _count?: boolean | PosteoCountOutputTypeDefaultArgs<ExtArgs>
@@ -2597,13 +2638,14 @@ export namespace Prisma {
     titulo?: boolean
     contenido?: boolean
     fecha?: boolean
+    anonymousId?: boolean
     usuarioId?: boolean
     comisionId?: boolean
   }
 
-  export type PosteoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "titulo" | "contenido" | "fecha" | "usuarioId" | "comisionId", ExtArgs["result"]["posteo"]>
+  export type PosteoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "titulo" | "contenido" | "fecha" | "anonymousId" | "usuarioId" | "comisionId", ExtArgs["result"]["posteo"]>
   export type PosteoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    usuario?: boolean | UserDefaultArgs<ExtArgs>
+    usuario?: boolean | Posteo$usuarioArgs<ExtArgs>
     comision?: boolean | ComisionDefaultArgs<ExtArgs>
     votos?: boolean | Posteo$votosArgs<ExtArgs>
     _count?: boolean | PosteoCountOutputTypeDefaultArgs<ExtArgs>
@@ -2612,7 +2654,7 @@ export namespace Prisma {
   export type $PosteoPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Posteo"
     objects: {
-      usuario: Prisma.$UserPayload<ExtArgs>
+      usuario: Prisma.$UserPayload<ExtArgs> | null
       comision: Prisma.$ComisionPayload<ExtArgs>
       votos: Prisma.$VotePayload<ExtArgs>[]
     }
@@ -2621,7 +2663,8 @@ export namespace Prisma {
       titulo: string
       contenido: string
       fecha: Date
-      usuarioId: number
+      anonymousId: string | null
+      usuarioId: number | null
       comisionId: number
     }, ExtArgs["result"]["posteo"]>
     composites: {}
@@ -2963,7 +3006,7 @@ export namespace Prisma {
    */
   export interface Prisma__PosteoClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    usuario<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    usuario<T extends Posteo$usuarioArgs<ExtArgs> = {}>(args?: Subset<T, Posteo$usuarioArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     comision<T extends ComisionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ComisionDefaultArgs<ExtArgs>>): Prisma__ComisionClient<$Result.GetResult<Prisma.$ComisionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     votos<T extends Posteo$votosArgs<ExtArgs> = {}>(args?: Subset<T, Posteo$votosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
@@ -2999,6 +3042,7 @@ export namespace Prisma {
     readonly titulo: FieldRef<"Posteo", 'String'>
     readonly contenido: FieldRef<"Posteo", 'String'>
     readonly fecha: FieldRef<"Posteo", 'DateTime'>
+    readonly anonymousId: FieldRef<"Posteo", 'String'>
     readonly usuarioId: FieldRef<"Posteo", 'Int'>
     readonly comisionId: FieldRef<"Posteo", 'Int'>
   }
@@ -3341,6 +3385,25 @@ export namespace Prisma {
      * Limit how many Posteos to delete.
      */
     limit?: number
+  }
+
+  /**
+   * Posteo.usuario
+   */
+  export type Posteo$usuarioArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
   }
 
   /**
@@ -6357,7 +6420,10 @@ export namespace Prisma {
     email: 'email',
     password: 'password',
     role: 'role',
-    creadoEn: 'creadoEn'
+    creadoEn: 'creadoEn',
+    resetToken: 'resetToken',
+    resetTokenExpiry: 'resetTokenExpiry',
+    resetTokenCreatedAt: 'resetTokenCreatedAt'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -6368,6 +6434,7 @@ export namespace Prisma {
     titulo: 'titulo',
     contenido: 'contenido',
     fecha: 'fecha',
+    anonymousId: 'anonymousId',
     usuarioId: 'usuarioId',
     comisionId: 'comisionId'
   };
@@ -6414,10 +6481,19 @@ export namespace Prisma {
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+  export const NullsOrder: {
+    first: 'first',
+    last: 'last'
+  };
+
+  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
   export const UserOrderByRelevanceFieldEnum: {
     name: 'name',
     email: 'email',
-    password: 'password'
+    password: 'password',
+    resetToken: 'resetToken'
   };
 
   export type UserOrderByRelevanceFieldEnum = (typeof UserOrderByRelevanceFieldEnum)[keyof typeof UserOrderByRelevanceFieldEnum]
@@ -6425,7 +6501,8 @@ export namespace Prisma {
 
   export const PosteoOrderByRelevanceFieldEnum: {
     titulo: 'titulo',
-    contenido: 'contenido'
+    contenido: 'contenido',
+    anonymousId: 'anonymousId'
   };
 
   export type PosteoOrderByRelevanceFieldEnum = (typeof PosteoOrderByRelevanceFieldEnum)[keyof typeof PosteoOrderByRelevanceFieldEnum]
@@ -6498,6 +6575,9 @@ export namespace Prisma {
     password?: StringFilter<"User"> | string
     role?: EnumRoleFilter<"User"> | $Enums.Role
     creadoEn?: DateTimeFilter<"User"> | Date | string
+    resetToken?: StringNullableFilter<"User"> | string | null
+    resetTokenExpiry?: DateTimeNullableFilter<"User"> | Date | string | null
+    resetTokenCreatedAt?: DateTimeNullableFilter<"User"> | Date | string | null
     posteos?: PosteoListRelationFilter
     votos?: VoteListRelationFilter
   }
@@ -6509,6 +6589,9 @@ export namespace Prisma {
     password?: SortOrder
     role?: SortOrder
     creadoEn?: SortOrder
+    resetToken?: SortOrderInput | SortOrder
+    resetTokenExpiry?: SortOrderInput | SortOrder
+    resetTokenCreatedAt?: SortOrderInput | SortOrder
     posteos?: PosteoOrderByRelationAggregateInput
     votos?: VoteOrderByRelationAggregateInput
     _relevance?: UserOrderByRelevanceInput
@@ -6524,6 +6607,9 @@ export namespace Prisma {
     password?: StringFilter<"User"> | string
     role?: EnumRoleFilter<"User"> | $Enums.Role
     creadoEn?: DateTimeFilter<"User"> | Date | string
+    resetToken?: StringNullableFilter<"User"> | string | null
+    resetTokenExpiry?: DateTimeNullableFilter<"User"> | Date | string | null
+    resetTokenCreatedAt?: DateTimeNullableFilter<"User"> | Date | string | null
     posteos?: PosteoListRelationFilter
     votos?: VoteListRelationFilter
   }, "id" | "name" | "email">
@@ -6535,6 +6621,9 @@ export namespace Prisma {
     password?: SortOrder
     role?: SortOrder
     creadoEn?: SortOrder
+    resetToken?: SortOrderInput | SortOrder
+    resetTokenExpiry?: SortOrderInput | SortOrder
+    resetTokenCreatedAt?: SortOrderInput | SortOrder
     _count?: UserCountOrderByAggregateInput
     _avg?: UserAvgOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
@@ -6552,6 +6641,9 @@ export namespace Prisma {
     password?: StringWithAggregatesFilter<"User"> | string
     role?: EnumRoleWithAggregatesFilter<"User"> | $Enums.Role
     creadoEn?: DateTimeWithAggregatesFilter<"User"> | Date | string
+    resetToken?: StringNullableWithAggregatesFilter<"User"> | string | null
+    resetTokenExpiry?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+    resetTokenCreatedAt?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   }
 
   export type PosteoWhereInput = {
@@ -6562,9 +6654,10 @@ export namespace Prisma {
     titulo?: StringFilter<"Posteo"> | string
     contenido?: StringFilter<"Posteo"> | string
     fecha?: DateTimeFilter<"Posteo"> | Date | string
-    usuarioId?: IntFilter<"Posteo"> | number
+    anonymousId?: StringNullableFilter<"Posteo"> | string | null
+    usuarioId?: IntNullableFilter<"Posteo"> | number | null
     comisionId?: IntFilter<"Posteo"> | number
-    usuario?: XOR<UserScalarRelationFilter, UserWhereInput>
+    usuario?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     comision?: XOR<ComisionScalarRelationFilter, ComisionWhereInput>
     votos?: VoteListRelationFilter
   }
@@ -6574,7 +6667,8 @@ export namespace Prisma {
     titulo?: SortOrder
     contenido?: SortOrder
     fecha?: SortOrder
-    usuarioId?: SortOrder
+    anonymousId?: SortOrderInput | SortOrder
+    usuarioId?: SortOrderInput | SortOrder
     comisionId?: SortOrder
     usuario?: UserOrderByWithRelationInput
     comision?: ComisionOrderByWithRelationInput
@@ -6590,9 +6684,10 @@ export namespace Prisma {
     titulo?: StringFilter<"Posteo"> | string
     contenido?: StringFilter<"Posteo"> | string
     fecha?: DateTimeFilter<"Posteo"> | Date | string
-    usuarioId?: IntFilter<"Posteo"> | number
+    anonymousId?: StringNullableFilter<"Posteo"> | string | null
+    usuarioId?: IntNullableFilter<"Posteo"> | number | null
     comisionId?: IntFilter<"Posteo"> | number
-    usuario?: XOR<UserScalarRelationFilter, UserWhereInput>
+    usuario?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     comision?: XOR<ComisionScalarRelationFilter, ComisionWhereInput>
     votos?: VoteListRelationFilter
   }, "id">
@@ -6602,7 +6697,8 @@ export namespace Prisma {
     titulo?: SortOrder
     contenido?: SortOrder
     fecha?: SortOrder
-    usuarioId?: SortOrder
+    anonymousId?: SortOrderInput | SortOrder
+    usuarioId?: SortOrderInput | SortOrder
     comisionId?: SortOrder
     _count?: PosteoCountOrderByAggregateInput
     _avg?: PosteoAvgOrderByAggregateInput
@@ -6619,7 +6715,8 @@ export namespace Prisma {
     titulo?: StringWithAggregatesFilter<"Posteo"> | string
     contenido?: StringWithAggregatesFilter<"Posteo"> | string
     fecha?: DateTimeWithAggregatesFilter<"Posteo"> | Date | string
-    usuarioId?: IntWithAggregatesFilter<"Posteo"> | number
+    anonymousId?: StringNullableWithAggregatesFilter<"Posteo"> | string | null
+    usuarioId?: IntNullableWithAggregatesFilter<"Posteo"> | number | null
     comisionId?: IntWithAggregatesFilter<"Posteo"> | number
   }
 
@@ -6799,6 +6896,9 @@ export namespace Prisma {
     password: string
     role?: $Enums.Role
     creadoEn?: Date | string
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    resetTokenCreatedAt?: Date | string | null
     posteos?: PosteoCreateNestedManyWithoutUsuarioInput
     votos?: VoteCreateNestedManyWithoutUserInput
   }
@@ -6810,6 +6910,9 @@ export namespace Prisma {
     password: string
     role?: $Enums.Role
     creadoEn?: Date | string
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    resetTokenCreatedAt?: Date | string | null
     posteos?: PosteoUncheckedCreateNestedManyWithoutUsuarioInput
     votos?: VoteUncheckedCreateNestedManyWithoutUserInput
   }
@@ -6820,6 +6923,9 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     creadoEn?: DateTimeFieldUpdateOperationsInput | Date | string
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resetTokenCreatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     posteos?: PosteoUpdateManyWithoutUsuarioNestedInput
     votos?: VoteUpdateManyWithoutUserNestedInput
   }
@@ -6831,6 +6937,9 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     creadoEn?: DateTimeFieldUpdateOperationsInput | Date | string
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resetTokenCreatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     posteos?: PosteoUncheckedUpdateManyWithoutUsuarioNestedInput
     votos?: VoteUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -6842,6 +6951,9 @@ export namespace Prisma {
     password: string
     role?: $Enums.Role
     creadoEn?: Date | string
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    resetTokenCreatedAt?: Date | string | null
   }
 
   export type UserUpdateManyMutationInput = {
@@ -6850,6 +6962,9 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     creadoEn?: DateTimeFieldUpdateOperationsInput | Date | string
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resetTokenCreatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -6859,13 +6974,17 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     creadoEn?: DateTimeFieldUpdateOperationsInput | Date | string
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resetTokenCreatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type PosteoCreateInput = {
     titulo: string
     contenido: string
     fecha?: Date | string
-    usuario: UserCreateNestedOneWithoutPosteosInput
+    anonymousId?: string | null
+    usuario?: UserCreateNestedOneWithoutPosteosInput
     comision: ComisionCreateNestedOneWithoutPosteosInput
     votos?: VoteCreateNestedManyWithoutPostInput
   }
@@ -6875,7 +6994,8 @@ export namespace Prisma {
     titulo: string
     contenido: string
     fecha?: Date | string
-    usuarioId: number
+    anonymousId?: string | null
+    usuarioId?: number | null
     comisionId: number
     votos?: VoteUncheckedCreateNestedManyWithoutPostInput
   }
@@ -6884,7 +7004,8 @@ export namespace Prisma {
     titulo?: StringFieldUpdateOperationsInput | string
     contenido?: StringFieldUpdateOperationsInput | string
     fecha?: DateTimeFieldUpdateOperationsInput | Date | string
-    usuario?: UserUpdateOneRequiredWithoutPosteosNestedInput
+    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
+    usuario?: UserUpdateOneWithoutPosteosNestedInput
     comision?: ComisionUpdateOneRequiredWithoutPosteosNestedInput
     votos?: VoteUpdateManyWithoutPostNestedInput
   }
@@ -6894,7 +7015,8 @@ export namespace Prisma {
     titulo?: StringFieldUpdateOperationsInput | string
     contenido?: StringFieldUpdateOperationsInput | string
     fecha?: DateTimeFieldUpdateOperationsInput | Date | string
-    usuarioId?: IntFieldUpdateOperationsInput | number
+    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
+    usuarioId?: NullableIntFieldUpdateOperationsInput | number | null
     comisionId?: IntFieldUpdateOperationsInput | number
     votos?: VoteUncheckedUpdateManyWithoutPostNestedInput
   }
@@ -6904,7 +7026,8 @@ export namespace Prisma {
     titulo: string
     contenido: string
     fecha?: Date | string
-    usuarioId: number
+    anonymousId?: string | null
+    usuarioId?: number | null
     comisionId: number
   }
 
@@ -6912,6 +7035,7 @@ export namespace Prisma {
     titulo?: StringFieldUpdateOperationsInput | string
     contenido?: StringFieldUpdateOperationsInput | string
     fecha?: DateTimeFieldUpdateOperationsInput | Date | string
+    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type PosteoUncheckedUpdateManyInput = {
@@ -6919,7 +7043,8 @@ export namespace Prisma {
     titulo?: StringFieldUpdateOperationsInput | string
     contenido?: StringFieldUpdateOperationsInput | string
     fecha?: DateTimeFieldUpdateOperationsInput | Date | string
-    usuarioId?: IntFieldUpdateOperationsInput | number
+    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
+    usuarioId?: NullableIntFieldUpdateOperationsInput | number | null
     comisionId?: IntFieldUpdateOperationsInput | number
   }
 
@@ -7120,6 +7245,32 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | null
+    notIn?: string[] | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
   export type PosteoListRelationFilter = {
     every?: PosteoWhereInput
     some?: PosteoWhereInput
@@ -7130,6 +7281,11 @@ export namespace Prisma {
     every?: VoteWhereInput
     some?: VoteWhereInput
     none?: VoteWhereInput
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
   }
 
   export type PosteoOrderByRelationAggregateInput = {
@@ -7153,6 +7309,9 @@ export namespace Prisma {
     password?: SortOrder
     role?: SortOrder
     creadoEn?: SortOrder
+    resetToken?: SortOrder
+    resetTokenExpiry?: SortOrder
+    resetTokenCreatedAt?: SortOrder
   }
 
   export type UserAvgOrderByAggregateInput = {
@@ -7166,6 +7325,9 @@ export namespace Prisma {
     password?: SortOrder
     role?: SortOrder
     creadoEn?: SortOrder
+    resetToken?: SortOrder
+    resetTokenExpiry?: SortOrder
+    resetTokenCreatedAt?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -7175,6 +7337,9 @@ export namespace Prisma {
     password?: SortOrder
     role?: SortOrder
     creadoEn?: SortOrder
+    resetToken?: SortOrder
+    resetTokenExpiry?: SortOrder
+    resetTokenCreatedAt?: SortOrder
   }
 
   export type UserSumOrderByAggregateInput = {
@@ -7239,9 +7404,52 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type UserScalarRelationFilter = {
-    is?: UserWhereInput
-    isNot?: UserWhereInput
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | null
+    notIn?: string[] | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type UserNullableScalarRelationFilter = {
+    is?: UserWhereInput | null
+    isNot?: UserWhereInput | null
   }
 
   export type ComisionScalarRelationFilter = {
@@ -7260,6 +7468,7 @@ export namespace Prisma {
     titulo?: SortOrder
     contenido?: SortOrder
     fecha?: SortOrder
+    anonymousId?: SortOrder
     usuarioId?: SortOrder
     comisionId?: SortOrder
   }
@@ -7275,6 +7484,7 @@ export namespace Prisma {
     titulo?: SortOrder
     contenido?: SortOrder
     fecha?: SortOrder
+    anonymousId?: SortOrder
     usuarioId?: SortOrder
     comisionId?: SortOrder
   }
@@ -7284,6 +7494,7 @@ export namespace Prisma {
     titulo?: SortOrder
     contenido?: SortOrder
     fecha?: SortOrder
+    anonymousId?: SortOrder
     usuarioId?: SortOrder
     comisionId?: SortOrder
   }
@@ -7292,6 +7503,22 @@ export namespace Prisma {
     id?: SortOrder
     usuarioId?: SortOrder
     comisionId?: SortOrder
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type ComisionListRelationFilter = {
@@ -7388,6 +7615,11 @@ export namespace Prisma {
     materiaId?: SortOrder
   }
 
+  export type UserScalarRelationFilter = {
+    is?: UserWhereInput
+    isNot?: UserWhereInput
+  }
+
   export type PosteoScalarRelationFilter = {
     is?: PosteoWhereInput
     isNot?: PosteoWhereInput
@@ -7471,6 +7703,14 @@ export namespace Prisma {
 
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
   }
 
   export type PosteoUpdateManyWithoutUsuarioNestedInput = {
@@ -7563,10 +7803,12 @@ export namespace Prisma {
     connect?: VoteWhereUniqueInput | VoteWhereUniqueInput[]
   }
 
-  export type UserUpdateOneRequiredWithoutPosteosNestedInput = {
+  export type UserUpdateOneWithoutPosteosNestedInput = {
     create?: XOR<UserCreateWithoutPosteosInput, UserUncheckedCreateWithoutPosteosInput>
     connectOrCreate?: UserCreateOrConnectWithoutPosteosInput
     upsert?: UserUpsertWithoutPosteosInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPosteosInput, UserUpdateWithoutPosteosInput>, UserUncheckedUpdateWithoutPosteosInput>
   }
@@ -7591,6 +7833,14 @@ export namespace Prisma {
     update?: VoteUpdateWithWhereUniqueWithoutPostInput | VoteUpdateWithWhereUniqueWithoutPostInput[]
     updateMany?: VoteUpdateManyWithWhereWithoutPostInput | VoteUpdateManyWithWhereWithoutPostInput[]
     deleteMany?: VoteScalarWhereInput | VoteScalarWhereInput[]
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type VoteUncheckedUpdateManyWithoutPostNestedInput = {
@@ -7777,6 +8027,32 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | null
+    notIn?: string[] | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[]
@@ -7846,10 +8122,81 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | null
+    notIn?: string[] | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
   export type PosteoCreateWithoutUsuarioInput = {
     titulo: string
     contenido: string
     fecha?: Date | string
+    anonymousId?: string | null
     comision: ComisionCreateNestedOneWithoutPosteosInput
     votos?: VoteCreateNestedManyWithoutPostInput
   }
@@ -7859,6 +8206,7 @@ export namespace Prisma {
     titulo: string
     contenido: string
     fecha?: Date | string
+    anonymousId?: string | null
     comisionId: number
     votos?: VoteUncheckedCreateNestedManyWithoutPostInput
   }
@@ -7918,7 +8266,8 @@ export namespace Prisma {
     titulo?: StringFilter<"Posteo"> | string
     contenido?: StringFilter<"Posteo"> | string
     fecha?: DateTimeFilter<"Posteo"> | Date | string
-    usuarioId?: IntFilter<"Posteo"> | number
+    anonymousId?: StringNullableFilter<"Posteo"> | string | null
+    usuarioId?: IntNullableFilter<"Posteo"> | number | null
     comisionId?: IntFilter<"Posteo"> | number
   }
 
@@ -7954,6 +8303,9 @@ export namespace Prisma {
     password: string
     role?: $Enums.Role
     creadoEn?: Date | string
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    resetTokenCreatedAt?: Date | string | null
     votos?: VoteCreateNestedManyWithoutUserInput
   }
 
@@ -7964,6 +8316,9 @@ export namespace Prisma {
     password: string
     role?: $Enums.Role
     creadoEn?: Date | string
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    resetTokenCreatedAt?: Date | string | null
     votos?: VoteUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -8030,6 +8385,9 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     creadoEn?: DateTimeFieldUpdateOperationsInput | Date | string
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resetTokenCreatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     votos?: VoteUpdateManyWithoutUserNestedInput
   }
 
@@ -8040,6 +8398,9 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     creadoEn?: DateTimeFieldUpdateOperationsInput | Date | string
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resetTokenCreatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     votos?: VoteUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -8160,7 +8521,8 @@ export namespace Prisma {
     titulo: string
     contenido: string
     fecha?: Date | string
-    usuario: UserCreateNestedOneWithoutPosteosInput
+    anonymousId?: string | null
+    usuario?: UserCreateNestedOneWithoutPosteosInput
     votos?: VoteCreateNestedManyWithoutPostInput
   }
 
@@ -8169,7 +8531,8 @@ export namespace Prisma {
     titulo: string
     contenido: string
     fecha?: Date | string
-    usuarioId: number
+    anonymousId?: string | null
+    usuarioId?: number | null
     votos?: VoteUncheckedCreateNestedManyWithoutPostInput
   }
 
@@ -8230,6 +8593,9 @@ export namespace Prisma {
     password: string
     role?: $Enums.Role
     creadoEn?: Date | string
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    resetTokenCreatedAt?: Date | string | null
     posteos?: PosteoCreateNestedManyWithoutUsuarioInput
   }
 
@@ -8240,6 +8606,9 @@ export namespace Prisma {
     password: string
     role?: $Enums.Role
     creadoEn?: Date | string
+    resetToken?: string | null
+    resetTokenExpiry?: Date | string | null
+    resetTokenCreatedAt?: Date | string | null
     posteos?: PosteoUncheckedCreateNestedManyWithoutUsuarioInput
   }
 
@@ -8252,7 +8621,8 @@ export namespace Prisma {
     titulo: string
     contenido: string
     fecha?: Date | string
-    usuario: UserCreateNestedOneWithoutPosteosInput
+    anonymousId?: string | null
+    usuario?: UserCreateNestedOneWithoutPosteosInput
     comision: ComisionCreateNestedOneWithoutPosteosInput
   }
 
@@ -8261,7 +8631,8 @@ export namespace Prisma {
     titulo: string
     contenido: string
     fecha?: Date | string
-    usuarioId: number
+    anonymousId?: string | null
+    usuarioId?: number | null
     comisionId: number
   }
 
@@ -8287,6 +8658,9 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     creadoEn?: DateTimeFieldUpdateOperationsInput | Date | string
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resetTokenCreatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     posteos?: PosteoUpdateManyWithoutUsuarioNestedInput
   }
 
@@ -8297,6 +8671,9 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     creadoEn?: DateTimeFieldUpdateOperationsInput | Date | string
+    resetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resetTokenCreatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     posteos?: PosteoUncheckedUpdateManyWithoutUsuarioNestedInput
   }
 
@@ -8315,7 +8692,8 @@ export namespace Prisma {
     titulo?: StringFieldUpdateOperationsInput | string
     contenido?: StringFieldUpdateOperationsInput | string
     fecha?: DateTimeFieldUpdateOperationsInput | Date | string
-    usuario?: UserUpdateOneRequiredWithoutPosteosNestedInput
+    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
+    usuario?: UserUpdateOneWithoutPosteosNestedInput
     comision?: ComisionUpdateOneRequiredWithoutPosteosNestedInput
   }
 
@@ -8324,7 +8702,8 @@ export namespace Prisma {
     titulo?: StringFieldUpdateOperationsInput | string
     contenido?: StringFieldUpdateOperationsInput | string
     fecha?: DateTimeFieldUpdateOperationsInput | Date | string
-    usuarioId?: IntFieldUpdateOperationsInput | number
+    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
+    usuarioId?: NullableIntFieldUpdateOperationsInput | number | null
     comisionId?: IntFieldUpdateOperationsInput | number
   }
 
@@ -8333,6 +8712,7 @@ export namespace Prisma {
     titulo: string
     contenido: string
     fecha?: Date | string
+    anonymousId?: string | null
     comisionId: number
   }
 
@@ -8346,6 +8726,7 @@ export namespace Prisma {
     titulo?: StringFieldUpdateOperationsInput | string
     contenido?: StringFieldUpdateOperationsInput | string
     fecha?: DateTimeFieldUpdateOperationsInput | Date | string
+    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
     comision?: ComisionUpdateOneRequiredWithoutPosteosNestedInput
     votos?: VoteUpdateManyWithoutPostNestedInput
   }
@@ -8355,6 +8736,7 @@ export namespace Prisma {
     titulo?: StringFieldUpdateOperationsInput | string
     contenido?: StringFieldUpdateOperationsInput | string
     fecha?: DateTimeFieldUpdateOperationsInput | Date | string
+    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
     comisionId?: IntFieldUpdateOperationsInput | number
     votos?: VoteUncheckedUpdateManyWithoutPostNestedInput
   }
@@ -8364,6 +8746,7 @@ export namespace Prisma {
     titulo?: StringFieldUpdateOperationsInput | string
     contenido?: StringFieldUpdateOperationsInput | string
     fecha?: DateTimeFieldUpdateOperationsInput | Date | string
+    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
     comisionId?: IntFieldUpdateOperationsInput | number
   }
 
@@ -8441,14 +8824,16 @@ export namespace Prisma {
     titulo: string
     contenido: string
     fecha?: Date | string
-    usuarioId: number
+    anonymousId?: string | null
+    usuarioId?: number | null
   }
 
   export type PosteoUpdateWithoutComisionInput = {
     titulo?: StringFieldUpdateOperationsInput | string
     contenido?: StringFieldUpdateOperationsInput | string
     fecha?: DateTimeFieldUpdateOperationsInput | Date | string
-    usuario?: UserUpdateOneRequiredWithoutPosteosNestedInput
+    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
+    usuario?: UserUpdateOneWithoutPosteosNestedInput
     votos?: VoteUpdateManyWithoutPostNestedInput
   }
 
@@ -8457,7 +8842,8 @@ export namespace Prisma {
     titulo?: StringFieldUpdateOperationsInput | string
     contenido?: StringFieldUpdateOperationsInput | string
     fecha?: DateTimeFieldUpdateOperationsInput | Date | string
-    usuarioId?: IntFieldUpdateOperationsInput | number
+    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
+    usuarioId?: NullableIntFieldUpdateOperationsInput | number | null
     votos?: VoteUncheckedUpdateManyWithoutPostNestedInput
   }
 
@@ -8466,7 +8852,8 @@ export namespace Prisma {
     titulo?: StringFieldUpdateOperationsInput | string
     contenido?: StringFieldUpdateOperationsInput | string
     fecha?: DateTimeFieldUpdateOperationsInput | Date | string
-    usuarioId?: IntFieldUpdateOperationsInput | number
+    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
+    usuarioId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
 
