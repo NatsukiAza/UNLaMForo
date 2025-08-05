@@ -10,8 +10,12 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Todos los campos son obligatorios" }, { status: 400 });
     }
 
-    const existingEmail = await db.user.findUnique({ where: { email }});
-    const existingUsername = await db.user.findUnique({ where: { name }});
+    // Ejecutar validaciones en paralelo para mejor rendimiento
+    const [existingEmail, existingUsername] = await Promise.all([
+      db.user.findUnique({ where: { email } }),
+      db.user.findUnique({ where: { name } })
+    ]);
+
     if (existingUsername) {
       return NextResponse.json({ error: "El nombre de usuario ya esta en uso"}, {status: 400});
     } else if(existingEmail){

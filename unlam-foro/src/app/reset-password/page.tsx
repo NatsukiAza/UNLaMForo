@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { Roboto } from "next/font/google";
 import Link from "next/link";
+import PasswordInput from "../components/PasswordInput";
 
 const roboto = Roboto({
   weight: ["100", "200", "400", "600", "800", "900"],
@@ -163,11 +164,9 @@ function ResetPasswordContent() {
             >
               <div className="flex flex-col">
                 <label>Nueva contraseña:</label>
-                <input
-                  type="password"
-                  className="trans border-1 w-full md:w-75 lg:w-100 p-2 border-[rgba(255,255,255,0.5)] bg-[rgba(0,0,0,0.08)] hover:bg-[rgba(0,0,0,0.2)] rounded-sm backdrop-blur-xl"
+                <PasswordInput
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChangeAction={(e) => setPassword(e.target.value)}
                   required
                   disabled={isLoading}
                   minLength={6}
@@ -175,11 +174,9 @@ function ResetPasswordContent() {
               </div>
               <div className="flex flex-col">
                 <label>Confirmar contraseña:</label>
-                <input
-                  type="password"
-                  className="trans border-1 w-full md:w-75 lg:w-100 p-2 border-[rgba(255,255,255,0.5)] bg-[rgba(0,0,0,0.08)] hover:bg-[rgba(0,0,0,0.2)] rounded-sm backdrop-blur-xl"
+                <PasswordInput
                   value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  onChangeAction={(e) => setConfirmPassword(e.target.value)}
                   required
                   disabled={isLoading}
                   minLength={6}

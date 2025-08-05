@@ -9,7 +9,7 @@ export async function POST(request: NextRequest) {
 
     if (!email) {
       return NextResponse.json(
-        { error: "El email es requerido" },
+        { error: "No se ha proporcionado un email" },
         { status: 400 }
       );
     }
@@ -75,12 +75,12 @@ export async function POST(request: NextRequest) {
     await transporter.sendMail({
       from: process.env.SMTP_USER,
       to: email,
-      subject: "Recuperación de contraseña - UNLaM Foro",
+      subject: "Recuperación de contraseña - Foro Opiniones",
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #009674;">Recuperación de contraseña</h2>
           <p>Hola ${user.name},</p>
-          <p>Has solicitado restablecer tu contraseña en UNLaM Foro.</p>
+          <p>Has solicitado restablecer tu contraseña en Foro Opiniones.</p>
           <p>Haz clic en el siguiente enlace para crear una nueva contraseña:</p>
           <a href="${resetUrl}" style="display: inline-block; background-color: #009674; color: white; padding: 12px 24px; text-decoration: none; border-radius: 4px; margin: 20px 0;">
             Restablecer contraseña
@@ -93,11 +93,10 @@ export async function POST(request: NextRequest) {
     });
 
     return NextResponse.json(
-      { message: "Se ha enviado un correo con las instrucciones" },
+      { message: "Si el email existe, se enviará un correo con las instrucciones" },
       { status: 200 }
     );
-  } catch (error) {
-    console.error("Error en forgot-password:", error);
+  } catch {
     return NextResponse.json(
       { error: "Error interno del servidor" },
       { status: 500 }

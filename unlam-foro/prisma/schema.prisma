@@ -28,6 +28,9 @@ model User {
   resetToken         String?
   resetTokenExpiry   DateTime?
   resetTokenCreatedAt DateTime?
+
+  @@index([email])
+  @@index([name])
 }
 
 enum Role {
@@ -49,6 +52,10 @@ model Posteo {
   comision    Comision  @relation(fields: [comisionId], references: [id])
 
   votos       Vote[]
+
+  @@index([comisionId, fecha])
+  @@index([usuarioId])
+  @@index([fecha])
 }
 
 model Materia {
@@ -57,6 +64,8 @@ model Materia {
   anio      Int       
   createdAt DateTime  @default(now())
   comision  Comision[]
+
+  @@index([anio])
 }
 
 model Comision {
@@ -67,6 +76,9 @@ model Comision {
   materiaId Int 
   materia   Materia   @relation(fields: [materiaId], references: [codigo])
   posteos   Posteo[]
+
+  @@index([materiaId])
+  @@index([codigo])
 }
 
 model Vote {
@@ -79,4 +91,6 @@ model Vote {
   post      Posteo    @relation(fields: [postId], references: [id])
 
   @@unique([userId, postId])
+  @@index([postId])
+  @@index([userId])
 }

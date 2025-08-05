@@ -46,8 +46,7 @@ export async function POST(req: Request) {
     });
     console.log( "ANASHEI " + anonymousId);
     return NextResponse.json(post, {status:201});
-  } catch (error) {
-    console.log(error);
+  } catch {
     return NextResponse.json({message: "Error al crear post"}, {status:500});
   }
 }

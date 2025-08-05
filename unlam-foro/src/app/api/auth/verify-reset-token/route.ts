@@ -33,8 +33,7 @@ export async function POST(request: NextRequest) {
       { message: "Token válido" },
       { status: 200 }
     );
-  } catch (error) {
-    console.error("Error en verify-reset-token:", error);
+  } catch {
     return NextResponse.json(
       { error: "Error interno del servidor" },
       { status: 500 }
