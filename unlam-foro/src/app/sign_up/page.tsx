@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Roboto } from "next/font/google";
+import PasswordInput from "../components/PasswordInput";
 const roboto = Roboto({
   weight: ["100", "200", "400", "600", "800", "900"],
   subsets: ["latin"],
@@ -88,11 +89,9 @@ export default function RegisterPage() {
             </div>
             <div className="flex flex-col">
               <label>Contraseña:</label>
-              <input
-                type="password"
-                className="trans border-1 w-full md:w-75 lg:w-100 p-2 border-[rgba(255,255,255,0.5)] bg-[rgba(0,0,0,0.08)] hover:bg-[rgba(0,0,0,0.2)] rounded-sm backdrop-blur-xl"
+              <PasswordInput
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChangeAction={(e) => setPassword(e.target.value)}
                 required
               />
             </div>
