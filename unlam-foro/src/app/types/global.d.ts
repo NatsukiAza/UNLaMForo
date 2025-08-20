@@ -9,6 +9,14 @@ export type Post = {
   usuario: {
     name: string;
   } | null;
+  comision?: {
+    codigo: number;
+    profes: string;
+    materia: {
+      name: string;
+      codigo: number;
+    };
+  };
   votos: {
     value: number;
     id: number;
