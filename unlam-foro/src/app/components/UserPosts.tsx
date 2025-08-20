@@ -77,7 +77,6 @@ export default function UserPosts({ userId }: UserPostsProps) {
         {posts.map((post) => {
           const upvotes = post.votos.filter((v) => v.value === 1).length;
           const downvotes = post.votos.filter((v) => v.value === -1).length;
-          const totalVotes = upvotes - downvotes;
 
           return (
             <div
