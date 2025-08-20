@@ -31,3 +31,8 @@ body {
 .trans{
   transition: 0.5s, background-color 0.5s ease-in-out;
 }
+
+.grid-post{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(430px, 1fr));
+}
