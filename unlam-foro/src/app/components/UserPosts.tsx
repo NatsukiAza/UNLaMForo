@@ -73,7 +73,7 @@ export default function UserPosts({ userId }: UserPostsProps) {
       <h3 className="text-xl font-semibold text-[#009674] mb-4">
         Mis Posts ({posts.length})
       </h3>
-      <div className="space-y-4">
+      <div className="max-lg:space-y-4 grid-post lg:gap-5">
         {posts.map((post) => {
           const upvotes = post.votos.filter((v) => v.value === 1).length;
           const downvotes = post.votos.filter((v) => v.value === -1).length;
@@ -82,9 +82,9 @@ export default function UserPosts({ userId }: UserPostsProps) {
           return (
             <div
               key={post.id}
-              className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow"
+              className="w-[410px] bg-white border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow"
             >
-              <div className="flex justify-between items-start mb-3">
+              <div className="flex justify-between items-start mb-3 ">
                 <div>
                   <h4 className="font-semibold text-lg text-gray-800 mb-1">
                     {post.titulo}
@@ -123,19 +123,20 @@ export default function UserPosts({ userId }: UserPostsProps) {
                     className="flex items-center gap-1 text-gray-500 hover:text-green-600 transition-colors"
                     onClick={() => handleVote(post.id, 1)}
                   >
-                    <i className="material-icons text-sm">thumb_up</i>
+                    <i className="material-icons text-sm text-[#aaa]! cursor-pointer">
+                      thumb_up
+                    </i>
                     <span>{upvotes}</span>
                   </button>
                   <button
                     className="flex items-center gap-1 text-gray-500 hover:text-red-600 transition-colors"
                     onClick={() => handleVote(post.id, -1)}
                   >
-                    <i className="material-icons text-sm">thumb_down</i>
+                    <i className="material-icons text-sm text-[#aaa]! cursor-pointer">
+                      thumb_down
+                    </i>
                     <span>{downvotes}</span>
                   </button>
-                  <span className="text-sm text-gray-500">
-                    Total: {totalVotes}
-                  </span>
                 </div>
               </div>
             </div>

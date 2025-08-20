@@ -186,32 +186,24 @@ export default function Perfil() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="max-w-4xl mx-auto px-4">
+    <div className="min-h-screen bg-gray-50 pb-8">
+      <div className="px-4">
         {/* Header */}
-        <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
+        <div className="px-6 py-8 border-b-1 border-[#E2E7E7]">
           <h1 className="text-3xl font-bold text-[#009674] mb-2">Mi Perfil</h1>
           <p className="text-gray-600">
             Gestiona tu información personal y revisa tu actividad
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="flex max-lg:flex-col gap-6 max-lg:justify-items-center w-full">
           {/* Información del Perfil */}
-          <div className="lg:col-span-1">
-            <div className="bg-white rounded-lg shadow-sm p-6">
+          <div className="lg:col-span-1  w-full lg:w-[350px] lg:border-r-1 border-[#E2E7E7]">
+            <div className="p-6">
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-xl font-semibold text-gray-800">
                   Información Personal
                 </h2>
-                <button
-                  onClick={handleEditToggle}
-                  className="text-[#009674] hover:text-[#007a5a] transition-colors"
-                >
-                  <i className="material-icons text-lg">
-                    {isEditing ? "close" : "edit"}
-                  </i>
-                </button>
               </div>
 
               {message && (
@@ -229,9 +221,20 @@ export default function Perfil() {
               <div className="space-y-4">
                 {/* Nombre */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Nombre de Usuario
-                  </label>
+                  <div className="flex justify-between">
+                    <label className="block text-sm font-medium text-gray-700 mb-1 ">
+                      Nombre de Usuario
+                    </label>
+                    <button
+                      onClick={handleEditToggle}
+                      className="text-[#009674] hover:text-[#007a5a] transition-colors"
+                    >
+                      <i className="material-icons text-lg text-[#aaa]! cursor-pointer">
+                        {isEditing ? "close" : "edit"}
+                      </i>
+                    </button>
+                  </div>
+
                   {isEditing ? (
                     <div className="space-y-2">
                       <input
@@ -299,8 +302,8 @@ export default function Perfil() {
                       onClick={handlePasswordEditToggle}
                       className="text-[#009674] hover:text-[#007a5a] transition-colors"
                     >
-                      <i className="material-icons text-lg">
-                        {isEditingPassword ? "close" : "lock"}
+                      <i className="material-icons text-lg text-[#aaa]! cursor-pointer">
+                        {isEditingPassword ? "close" : "edit"}
                       </i>
                     </button>
                   </div>
@@ -380,8 +383,8 @@ export default function Perfil() {
           </div>
 
           {/* Posts del Usuario */}
-          <div className="lg:col-span-2">
-            <div className="bg-white rounded-lg shadow-sm p-6">
+          <div className="w-full">
+            <div className="p-6 w-full">
               <UserPosts userId={session.user.id} />
             </div>
           </div>
