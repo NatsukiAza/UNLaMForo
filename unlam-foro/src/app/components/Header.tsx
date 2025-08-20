@@ -13,6 +13,7 @@ const roboto = Roboto({
 
 export default async function Header() {
   const session = await getServerSession(authOptions);
+  const perfilUrl = `${process.env.NEXTAUTH_URL}/perfil`;
   const signInUrl = `${process.env.NEXTAUTH_URL}/sign_in`;
 
   return (
@@ -42,7 +43,7 @@ export default async function Header() {
             </h1>
             {session && (
               <div className="flex gap-4 text-[#009674] text-xs font-semibold whitespace-nowrap">
-                <a href="">Mi perfil</a>
+                <Link href={perfilUrl}>Mi perfil</Link>
                 <CerrarSesion></CerrarSesion>
               </div>
             )}

@@ -22,6 +22,10 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "El correo ya esta en uso", status: 400});
     }
 
+    if (!email.includes("@alumno.unlam.edu.ar")){
+      return NextResponse.json({ error: "Por medidas de seguridad, solo se permite el registro de usuarios con correo institucional"}, {status: 400});
+    }
+    // Verificar que no haya ningún usuario con el mismo nombre o correo
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = await db.user.create({
       data: { name, email, password: hashedPassword, role: "USER",},
