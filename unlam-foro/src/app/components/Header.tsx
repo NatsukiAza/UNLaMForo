@@ -4,7 +4,6 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { Roboto } from "next/font/google";
 import CerrarSesion from "./signOut";
-import ModoOscuro from "./ModoOscuro";
 import FilterButton from "./FiltroButton";
 const roboto = Roboto({
   weight: ["200", "400", "600"],
@@ -69,7 +68,6 @@ export default async function Header() {
             </i>
           </Link>
         </div>
-        <ModoOscuro />
       </section>
     </header>
   );

@@ -70,7 +70,7 @@ model Materia {
 
 model Comision {
   id        Int       @id @default(autoincrement())
-  profes    String    @db.VarChar(300)
+  profes    String?    @db.VarChar(300)
   codigo    Int     
   createdAt DateTime  @default(now())
   materiaId Int 
