@@ -23,7 +23,7 @@ export default function ComisionClient({
   comisionId: number;
   initialPosts: Post[];
   isLogued: boolean;
-  profes: string;
+  profes: string | null;
   codigo: number;
 }) {
   const postListRef = useRef<PostListRef>(null);
