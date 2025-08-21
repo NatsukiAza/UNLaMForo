@@ -4606,7 +4606,7 @@ export namespace Prisma {
 
   export type ComisionGroupByOutputType = {
     id: number
-    profes: string
+    profes: string | null
     codigo: number
     createdAt: Date
     materiaId: number
@@ -4667,7 +4667,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      profes: string
+      profes: string | null
       codigo: number
       createdAt: Date
       materiaId: number
@@ -6778,7 +6778,7 @@ export namespace Prisma {
     OR?: ComisionWhereInput[]
     NOT?: ComisionWhereInput | ComisionWhereInput[]
     id?: IntFilter<"Comision"> | number
-    profes?: StringFilter<"Comision"> | string
+    profes?: StringNullableFilter<"Comision"> | string | null
     codigo?: IntFilter<"Comision"> | number
     createdAt?: DateTimeFilter<"Comision"> | Date | string
     materiaId?: IntFilter<"Comision"> | number
@@ -6788,7 +6788,7 @@ export namespace Prisma {
 
   export type ComisionOrderByWithRelationInput = {
     id?: SortOrder
-    profes?: SortOrder
+    profes?: SortOrderInput | SortOrder
     codigo?: SortOrder
     createdAt?: SortOrder
     materiaId?: SortOrder
@@ -6802,7 +6802,7 @@ export namespace Prisma {
     AND?: ComisionWhereInput | ComisionWhereInput[]
     OR?: ComisionWhereInput[]
     NOT?: ComisionWhereInput | ComisionWhereInput[]
-    profes?: StringFilter<"Comision"> | string
+    profes?: StringNullableFilter<"Comision"> | string | null
     codigo?: IntFilter<"Comision"> | number
     createdAt?: DateTimeFilter<"Comision"> | Date | string
     materiaId?: IntFilter<"Comision"> | number
@@ -6812,7 +6812,7 @@ export namespace Prisma {
 
   export type ComisionOrderByWithAggregationInput = {
     id?: SortOrder
-    profes?: SortOrder
+    profes?: SortOrderInput | SortOrder
     codigo?: SortOrder
     createdAt?: SortOrder
     materiaId?: SortOrder
@@ -6828,7 +6828,7 @@ export namespace Prisma {
     OR?: ComisionScalarWhereWithAggregatesInput[]
     NOT?: ComisionScalarWhereWithAggregatesInput | ComisionScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Comision"> | number
-    profes?: StringWithAggregatesFilter<"Comision"> | string
+    profes?: StringNullableWithAggregatesFilter<"Comision"> | string | null
     codigo?: IntWithAggregatesFilter<"Comision"> | number
     createdAt?: DateTimeWithAggregatesFilter<"Comision"> | Date | string
     materiaId?: IntWithAggregatesFilter<"Comision"> | number
@@ -7102,7 +7102,7 @@ export namespace Prisma {
   }
 
   export type ComisionCreateInput = {
-    profes: string
+    profes?: string | null
     codigo: number
     createdAt?: Date | string
     materia: MateriaCreateNestedOneWithoutComisionInput
@@ -7111,7 +7111,7 @@ export namespace Prisma {
 
   export type ComisionUncheckedCreateInput = {
     id?: number
-    profes: string
+    profes?: string | null
     codigo: number
     createdAt?: Date | string
     materiaId: number
@@ -7119,7 +7119,7 @@ export namespace Prisma {
   }
 
   export type ComisionUpdateInput = {
-    profes?: StringFieldUpdateOperationsInput | string
+    profes?: NullableStringFieldUpdateOperationsInput | string | null
     codigo?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     materia?: MateriaUpdateOneRequiredWithoutComisionNestedInput
@@ -7128,7 +7128,7 @@ export namespace Prisma {
 
   export type ComisionUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    profes?: StringFieldUpdateOperationsInput | string
+    profes?: NullableStringFieldUpdateOperationsInput | string | null
     codigo?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     materiaId?: IntFieldUpdateOperationsInput | number
@@ -7137,21 +7137,21 @@ export namespace Prisma {
 
   export type ComisionCreateManyInput = {
     id?: number
-    profes: string
+    profes?: string | null
     codigo: number
     createdAt?: Date | string
     materiaId: number
   }
 
   export type ComisionUpdateManyMutationInput = {
-    profes?: StringFieldUpdateOperationsInput | string
+    profes?: NullableStringFieldUpdateOperationsInput | string | null
     codigo?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ComisionUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    profes?: StringFieldUpdateOperationsInput | string
+    profes?: NullableStringFieldUpdateOperationsInput | string | null
     codigo?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     materiaId?: IntFieldUpdateOperationsInput | number
@@ -8328,7 +8328,7 @@ export namespace Prisma {
   }
 
   export type ComisionCreateWithoutPosteosInput = {
-    profes: string
+    profes?: string | null
     codigo: number
     createdAt?: Date | string
     materia: MateriaCreateNestedOneWithoutComisionInput
@@ -8336,7 +8336,7 @@ export namespace Prisma {
 
   export type ComisionUncheckedCreateWithoutPosteosInput = {
     id?: number
-    profes: string
+    profes?: string | null
     codigo: number
     createdAt?: Date | string
     materiaId: number
@@ -8416,7 +8416,7 @@ export namespace Prisma {
   }
 
   export type ComisionUpdateWithoutPosteosInput = {
-    profes?: StringFieldUpdateOperationsInput | string
+    profes?: NullableStringFieldUpdateOperationsInput | string | null
     codigo?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     materia?: MateriaUpdateOneRequiredWithoutComisionNestedInput
@@ -8424,7 +8424,7 @@ export namespace Prisma {
 
   export type ComisionUncheckedUpdateWithoutPosteosInput = {
     id?: IntFieldUpdateOperationsInput | number
-    profes?: StringFieldUpdateOperationsInput | string
+    profes?: NullableStringFieldUpdateOperationsInput | string | null
     codigo?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     materiaId?: IntFieldUpdateOperationsInput | number
@@ -8447,7 +8447,7 @@ export namespace Prisma {
   }
 
   export type ComisionCreateWithoutMateriaInput = {
-    profes: string
+    profes?: string | null
     codigo: number
     createdAt?: Date | string
     posteos?: PosteoCreateNestedManyWithoutComisionInput
@@ -8455,7 +8455,7 @@ export namespace Prisma {
 
   export type ComisionUncheckedCreateWithoutMateriaInput = {
     id?: number
-    profes: string
+    profes?: string | null
     codigo: number
     createdAt?: Date | string
     posteos?: PosteoUncheckedCreateNestedManyWithoutComisionInput
@@ -8492,7 +8492,7 @@ export namespace Prisma {
     OR?: ComisionScalarWhereInput[]
     NOT?: ComisionScalarWhereInput | ComisionScalarWhereInput[]
     id?: IntFilter<"Comision"> | number
-    profes?: StringFilter<"Comision"> | string
+    profes?: StringNullableFilter<"Comision"> | string | null
     codigo?: IntFilter<"Comision"> | number
     createdAt?: DateTimeFilter<"Comision"> | Date | string
     materiaId?: IntFilter<"Comision"> | number
@@ -8792,13 +8792,13 @@ export namespace Prisma {
 
   export type ComisionCreateManyMateriaInput = {
     id?: number
-    profes: string
+    profes?: string | null
     codigo: number
     createdAt?: Date | string
   }
 
   export type ComisionUpdateWithoutMateriaInput = {
-    profes?: StringFieldUpdateOperationsInput | string
+    profes?: NullableStringFieldUpdateOperationsInput | string | null
     codigo?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     posteos?: PosteoUpdateManyWithoutComisionNestedInput
@@ -8806,7 +8806,7 @@ export namespace Prisma {
 
   export type ComisionUncheckedUpdateWithoutMateriaInput = {
     id?: IntFieldUpdateOperationsInput | number
-    profes?: StringFieldUpdateOperationsInput | string
+    profes?: NullableStringFieldUpdateOperationsInput | string | null
     codigo?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     posteos?: PosteoUncheckedUpdateManyWithoutComisionNestedInput
@@ -8814,7 +8814,7 @@ export namespace Prisma {
 
   export type ComisionUncheckedUpdateManyWithoutMateriaInput = {
     id?: IntFieldUpdateOperationsInput | number
-    profes?: StringFieldUpdateOperationsInput | string
+    profes?: NullableStringFieldUpdateOperationsInput | string | null
     codigo?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
