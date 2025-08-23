@@ -10,6 +10,7 @@ import {
 } from "react";
 import { Post } from "@/app/types/global";
 import { OrdenamientoType } from "./OrdenamientoFiltros";
+import { useRouter } from "next/navigation";
 
 export interface PostListRef {
   refresh: () => void;
@@ -26,6 +27,7 @@ const PostList = forwardRef<
   const [posteos, setPosts] = useState(initialPosts);
   const [loading, setLoading] = useState(false);
   const voteTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const router = useRouter();
 
   const fetchPosts = useCallback(async () => {
     try {
@@ -60,11 +62,17 @@ const PostList = forwardRef<
 
       voteTimeoutRef.current = setTimeout(async () => {
         try {
-          await fetch("/api/auth/posts/vote", {
+          const res = await fetch("/api/auth/posts/vote", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ postId, value }),
           });
+
+          if (res.status == 401) {
+            router.push("/sign_in");
+            return;
+          }
+
           fetchPosts();
         } catch (error) {
           console.error("Error voting:", error);
